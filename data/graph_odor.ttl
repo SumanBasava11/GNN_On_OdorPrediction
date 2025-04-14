@@ -1,0 +1,3983 @@
+@prefix : <http://www.oniris-nantes.fr/graph-odeurs#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.oniris-nantes.fr/graph-odeurs#> .
+
+#################################################################
+#    Propriété
+#################################################################
+:synonyme a rdf:Property.
+#################################################################
+#    Classes
+#################################################################
+
+#Acetique
+:Acetique rdf:type rdfs:Class ;
+          rdfs:subClassOf :Chimique ,
+                          :Fermentaire ;
+          rdfs:label "Acetic"@en ,
+                     "Acétique"@fr .
+
+
+#Agrume
+:Agrume rdf:type rdfs:Class ;
+        rdfs:subClassOf :Fruite ;
+        rdfs:label "Agrume"@fr ,
+                   "Citrus"@en .
+
+
+
+
+
+#Alcool_Blanc
+:Alcool_Blanc rdf:type rdfs:Class ;
+              rdfs:subClassOf :Boissons_Alcoolisees ;
+              rdfs:label "Alcool Blanc"@fr ,
+                         "White Alcohol"@en .
+
+
+#Alcool_De_Fut
+:Alcool_De_Fut rdf:type rdfs:Class ;
+               rdfs:subClassOf :Balsamique,
+                               :Boissons_Alcoolisees;
+               rdfs:label "Alcool De Fût"@fr ,
+                          "Barrel Aged Alcohol"@en .
+
+
+#Aldehyde
+:Aldehyde rdf:type rdfs:Class ;
+          rdfs:subClassOf :Gras ,
+                          :Vegetal_Vert ;
+          rdfs:label "Aldehydic"@en ,
+                     "Aldéhyde"@fr .
+
+
+#Aldehyde_frais
+:Aldehyde_frais rdf:type rdfs:Class ;
+                rdfs:subClassOf :Frais ;
+                rdfs:label "Aldéhyde frais"@fr ,
+                           "Fresh Aldehydic"@en .
+
+
+#Alliace
+:Alliace rdf:type rdfs:Class ;
+         rdfs:subClassOf :Legume ,
+                         :Soufre ;
+         rdfs:label "Alliaceous"@en ,
+                    "Alliacé"@fr .
+
+
+
+
+#Amande_Amere
+:Amande_Amere rdf:type rdfs:Class ;
+              rdfs:subClassOf :Doux ;
+              rdfs:label "Amande Amère"@fr ,
+                         "Bitter Almond"@en .
+
+
+#Amine
+:Amine rdf:type rdfs:Class ;
+       rdfs:subClassOf :Odeur ;
+       rdfs:label "Amine"@en ,
+                  "Aminé"@fr .
+
+
+
+
+
+#Animal
+:Animal rdf:type rdfs:Class ;
+        rdfs:subClassOf :Odeur ;
+        rdfs:label "Animal"@en ,
+                   "Animal"@fr .
+
+
+
+
+
+#Anise
+:Anise rdf:type rdfs:Class ;
+       rdfs:subClassOf :Frais ;
+       rdfs:label "Anisic"@en ,
+                  "Anisé"@fr .
+
+
+#Baie
+:Baie rdf:type rdfs:Class ;
+      rdfs:subClassOf :Fruite ;
+      rdfs:label "Baie"@fr ,
+                 "Berry"@en .
+
+
+#Balsamique
+:Balsamique rdf:type rdfs:Class ;
+            rdfs:subClassOf :Boise ,
+                            :Doux ;
+            rdfs:label "Balsamic"@en ,
+                       "Balsamique"@fr .
+
+
+
+
+
+#Banane
+:Banane rdf:type rdfs:Class ;
+        rdfs:subClassOf :Fruit_Exotique ;
+        rdfs:label "Banana"@en ,
+                   "Banane"@fr .
+
+
+#Beurre
+:Beurre rdf:type rdfs:Class ;
+        rdfs:subClassOf :Gras ,
+                        :Lactique ;
+        rdfs:label "Beurre"@fr ,
+                   "Butter"@en .
+
+
+#Biscuit
+:Biscuit rdf:type rdfs:Class ;
+         rdfs:subClassOf :Cuit,
+                         :Doux ;
+         rdfs:label "Biscuit"@en ,
+                    "Biscuit"@fr .
+
+
+#Bois
+:Bois rdf:type rdfs:Class ;
+      rdfs:subClassOf :Boise ,
+                      :Vegetal ;
+      rdfs:label "Bois"@fr ,
+                 "Wood"@en .
+
+
+
+
+#Boise
+:Boise rdf:type rdfs:Class ;
+       rdfs:subClassOf :Odeur ;
+       rdfs:label "Boisé"@fr ,
+                  "Woody"@en .
+
+
+
+
+
+#Boisson_Fermentee
+:Boisson_Fermentee rdf:type rdfs:Class ;
+                   rdfs:subClassOf :Boissons_Alcoolisees ,
+                                   :Fermentaire ;
+                   rdfs:label "Boisson Fermentée"@fr ,
+                              "Fermented Drink"@en .
+
+#Boissons_Alcoolisees
+:Boissons_Alcoolisees rdf:type rdfs:Class ;
+        rdfs:subClassOf :Chimique ;
+        rdfs:label "Alcoholic Beverages"@en ,
+                   "Boissons Alcoolisées"@fr .
+
+
+#Bouillon
+:Bouillon rdf:type rdfs:Class ;
+          rdfs:subClassOf :Cuit ;
+          rdfs:label "Bouillon"@en ,
+                     "Bouillon"@fr .
+
+
+#Brule
+:Brule rdf:type rdfs:Class ;
+       rdfs:subClassOf :Empyreumatique ;
+       rdfs:label "Brûlé"@fr ,
+                  "Burnt"@en .
+
+
+#Cacahuete
+:Cacahuete rdf:type rdfs:Class ;
+           rdfs:subClassOf :Oleagineux ;
+           :synonyme "arrack"@en,
+                     "arachide"@fr;
+           rdfs:label "Cacahuète"@fr ,
+                      "Peanut"@en .
+
+
+#Cacao
+:Cacao rdf:type rdfs:Class ;
+       rdfs:subClassOf :Malte ,
+                       :Torrefie ;
+       rdfs:label "Cacao"@fr ,
+                  "Cocoa"@en .
+
+
+#Camphre
+:Camphre rdf:type rdfs:Class ;
+         rdfs:subClassOf :Medicinal ,
+                         :Menthe ;
+         :synonyme "camphoreous"@en;
+         rdfs:label "Camphor"@en ,
+                    "Camphré"@fr .
+
+
+#Caramel
+:Caramel rdf:type rdfs:Class ;
+         rdfs:subClassOf :Sucre_Cuit ;
+         :synonyme "butterscotch"@en,
+                   "caramellic"@en;
+         rdfs:label "Caramel"@en ,
+                    "Caramel"@fr .
+
+
+#Cereale
+:Cereale rdf:type rdfs:Class ;
+         rdfs:subClassOf :Malte ;
+         rdfs:label "Cereal"@en ,
+                    "Céréale"@fr .
+
+
+#Cereale_Torrefiee
+:Cereale_Torrefiee rdf:type rdfs:Class ;
+                  rdfs:subClassOf :Cereale ,
+                  :Torrefie ;
+                  rdfs:label "Céréale Torréfiée"@fr ,
+                  "Roasted Cereal"@en .
+
+
+#cerise
+:cerise rdf:type rdfs:Class ;
+        rdfs:subClassOf :Fruit_Rouge ;
+        rdfs:label "cerise"@fr ,
+                   "cherry"@en .
+
+
+#Champignon
+:Champignon rdf:type rdfs:Class ;
+            rdfs:subClassOf :Boise,
+                            :Moisi ,
+                            :Terreux ;
+            :synonyme "fungal"@en ;
+            rdfs:label "Champignon"@fr ,
+                       "Mushroom"@en .
+
+
+#Chimique
+:Chimique rdf:type rdfs:Class ;
+          rdfs:subClassOf :Odeur ;
+          rdfs:label "Chemical"@en ,
+                     "Chimique"@fr .
+
+
+#Chlore
+:Chlore rdf:type rdfs:Class ;
+        rdfs:subClassOf :Chimique ;
+        rdfs:label "Chlore"@fr ,
+                   "Chlorine"@en .
+
+
+#Chou
+:Chou rdf:type rdfs:Class ;
+      rdfs:subClassOf :Crucifere ;
+      rdfs:label "Cabbage"@en ,
+                 "Chou"@fr .
+
+
+#Citronne
+:Citronne rdf:type rdfs:Class ;
+          rdfs:subClassOf :Agrume ,
+                          :Frais ;
+          rdfs:label "Citronné"@fr ,
+                     "Lemony"@en .
+
+
+#Coquillage
+:Coquillage rdf:type rdfs:Class ;
+            rdfs:subClassOf :Fruit_De_Mer ;
+            rdfs:label "Coquillage"@fr ,
+                       "Shellfish"@en .
+
+
+#Coumarine
+:Coumarine rdf:type rdfs:Class ;
+           rdfs:subClassOf :Balsamique ,
+                           :Frais,
+                           :Lactone ,
+                           :Vegetal_Sec ;
+           rdfs:label "Coumarin"@en ,
+                      "Coumarine"@fr .
+
+
+#Creme
+:Creme rdf:type rdfs:Class ;
+       rdfs:subClassOf :Lactique ;
+       rdfs:label "Cream"@en ,
+                  "Crème"@fr .
+
+
+#Crucifere
+:Crucifere rdf:type rdfs:Class ;
+           rdfs:subClassOf :Legume ,
+                           :Soufre ;
+           rdfs:label "Cruciferous"@en ,
+                      "Crucifère"@fr .
+
+
+
+
+
+#Cucurbitacee
+:Cucurbitacee rdf:type rdfs:Class ;
+              rdfs:subClassOf :Legume ;
+              rdfs:label "Cucurbitacea"@en ,
+                         "Cucurbitacée"@fr .
+
+
+#Cuit
+:Cuit rdf:type rdfs:Class ;
+      rdfs:subClassOf :Empyreumatique ;
+      rdfs:label "Cooked"@en ,
+                 "Cuit"@fr .
+
+
+#Cuir
+:Cuir rdf:type rdfs:Class ;
+      rdfs:subClassOf :Animal ,
+                      :Phenole ;
+      rdfs:label "Cuir"@fr ,
+                 "Leathery"@en .
+
+
+#Doux
+:Doux rdf:type rdfs:Class ;
+      rdfs:subClassOf :Odeur ;
+      rdfs:label "Doux"@fr ,
+                 "Sweet"@en .
+
+
+
+
+
+#Empyreumatique
+:Empyreumatique rdf:type rdfs:Class ;
+                rdfs:subClassOf :Odeur ;
+                rdfs:label "Empyreumatic"@en ,
+                           "Empyreumatique"@fr .
+
+
+#Epice
+:Epice rdf:type rdfs:Class ;
+       rdfs:subClassOf :Odeur ;
+       rdfs:label "Epicé"@fr ,
+                  "Spicy"@en .
+
+
+
+
+
+#Fermentaire
+:Fermentaire rdf:type rdfs:Class ;
+             rdfs:subClassOf :Odeur ;
+             rdfs:label "Fermentaire"@fr ,
+                        "Fermented"@en .
+
+
+
+
+#Fleur_Du_Jardin
+:Fleur_Du_Jardin rdf:type rdfs:Class ;
+                 rdfs:subClassOf :Floral ;
+                 rdfs:label "Fleur Du Jardin"@fr ,
+                            "Garden Flower"@en .
+
+
+#Fleur_d_arbre
+:Fleur_d_arbre rdf:type rdfs:Class ;
+               rdfs:subClassOf :Floral ;
+               rdfs:label "Fleur d'Arbre"@fr ,
+                          "Tree Flower"@en .
+
+
+#Fleur_d_arbuste
+:Fleur_d_arbuste rdf:type rdfs:Class ;
+                 rdfs:subClassOf :Floral ;
+                 rdfs:label "Bush Flower"@en ,
+                            "Fleur d'arbuste"@fr .
+
+
+#fleur_d_oranger
+:Fleur_d_oranger rdf:type rdfs:Class ;
+                 rdfs:subClassOf
+                          :Fleur_d_arbre ,
+                          :Fruite,
+                          :Mielle ;
+                 :synonyme "neroli"@en ,
+                           "neroli"@fr ;
+                 rdfs:label "Fleur d'oranger"@fr ,
+                            "Orange blossom"@en .
+
+
+#Floral
+:Floral rdf:type rdfs:Class ;
+        rdfs:subClassOf :Odeur ;
+        rdfs:label "Floral"@en ,
+                   "Floral"@fr .
+
+
+
+
+
+#Foret
+:Foret rdf:type rdfs:Class ;
+       rdfs:subClassOf :Boise ,
+                       :Terreux ,
+                       :Vegetal ;
+       rdfs:label "Forest"@en ,
+                  "Forêt"@fr .
+
+
+#Frais
+:Frais rdf:type rdfs:Class ;
+       rdfs:subClassOf :Odeur ;
+       rdfs:label "Frais"@fr ,
+                  "Fresh"@en .
+
+
+
+
+#Friture
+:Friture rdf:type rdfs:Class ;
+         rdfs:subClassOf :Gras ;
+         rdfs:label "Fried"@en ,
+                    "Friture"@fr .
+
+
+#Fromage
+:Fromage rdf:type rdfs:Class ;
+         rdfs:subClassOf :Fermentaire ,
+                         :Lactique ;
+         :synonyme "cheesy"@en ;
+         rdfs:label "Cheese"@en ,
+                    "Fromage"@fr .
+
+
+#fromage_bleu
+:Fromage_bleu rdf:type rdfs:Class ;
+              rdfs:subClassOf :Fromage ,
+                              :Moisi ;
+              rdfs:label "Fromage bleu"@fr ,
+                         "Blue cheese"@en .
+
+
+#Fruit_Cuit
+:Fruit_Cuit rdf:type rdfs:Class ;
+            rdfs:subClassOf :Fruite ;
+            rdfs:label "Cooked Fruit"@en ,
+                       "Fruit Cuit"@fr .
+
+
+#Fruit_De_Mer
+:Fruit_De_Mer rdf:type rdfs:Class ;
+              rdfs:subClassOf :Amine ;
+              rdfs:label "Fruit De Mer"@fr ,
+                         "Seafood"@en .
+
+
+
+
+#Fruit_Exotique
+:Fruit_Exotique rdf:type rdfs:Class ;
+                rdfs:subClassOf :Fruite ;
+                rdfs:label "Fruit Exotique"@fr ,
+                           "Tropical Fruit"@en .
+
+
+
+
+
+#Fruit_Noir
+:Fruit_Noir rdf:type rdfs:Class ;
+            rdfs:subClassOf :Fruite ;
+            rdfs:label "Black Fruit"@en ,
+                       "Fruit Noir"@fr .
+
+
+#Fruit_Rouge
+:Fruit_Rouge rdf:type rdfs:Class ;
+             rdfs:subClassOf :Fruite ;
+             rdfs:label "Fruit Rouge"@fr ,
+                        "Red Berry"@en .
+
+
+#Fruit_Sec
+:Fruit_Sec rdf:type rdfs:Class ;
+           rdfs:subClassOf :Fruite ;
+           rdfs:label "Dried Fruit"@en ,
+                      "Fruit Sec"@fr .
+
+
+
+
+#Fruit_a_Coque
+:Fruit_a_Coque rdf:type rdfs:Class ;
+               rdfs:subClassOf :Oleagineux ;
+               rdfs:label "Fruit à Coque"@fr ,
+                          "Nutty"@en .
+
+
+#Fruit_a_Coque_Torrefie
+:Fruit_a_Coque_Torrefie rdf:type rdfs:Class ;
+                        rdfs:subClassOf :Torrefie ;
+                        rdfs:label "Fruit à Coque Torréfié"@fr ,
+                                   "Roasted Nut"@en .
+
+
+#Fruit_a_Noyau
+:Fruit_a_Noyau rdf:type rdfs:Class ;
+               rdfs:subClassOf :Fruite ;
+               rdfs:label "Fruit à Noyau"@fr ,
+                          "Stone Fruit"@en .
+
+
+#Fruit_a_Pepins
+:Fruit_a_Pepins rdf:type rdfs:Class ;
+                rdfs:subClassOf :Fruite ;
+                rdfs:label "Fruit With Pip"@en ,
+                           "Fruit à Pépins"@fr .
+
+
+
+
+#Fruite
+:Fruite rdf:type rdfs:Class ;
+        rdfs:subClassOf :Odeur ;
+        :synonyme "Fruit"@fr;
+        rdfs:label "Fruity"@en ,
+                   "Fruité"@fr .
+
+
+
+
+
+#Fume
+:Fume rdf:type rdfs:Class ;
+      rdfs:subClassOf :Empyreumatique ,
+                      :Phenole ;
+      rdfs:label "Fumé"@fr ,
+                 "Smoked"@en .
+
+
+
+
+
+#Graisse_Animale
+:Graisse_Animale rdf:type rdfs:Class ;
+                 rdfs:subClassOf :Animal ,
+                                 :Gras ;
+                 rdfs:label "Animal Fat"@en ,
+                            "Graisse Animale"@fr .
+
+
+#Gras
+:Gras rdf:type rdfs:Class ;
+      rdfs:subClassOf :Odeur ;
+      rdfs:label "Fatty"@en ,
+                 "Gras"@fr .
+
+
+
+
+
+#Grille
+:Grille rdf:type rdfs:Class ;
+        rdfs:subClassOf :Empyreumatique ;
+        rdfs:label "Grilled"@en ,
+                   "Grillé"@fr .
+
+
+#Lacte
+:Lacte rdf:type rdfs:Class ;
+       rdfs:subClassOf :Lactique ;
+       rdfs:label "Lacté"@fr ,
+                  "Milky"@en .
+
+
+#Lactique
+:Lactique rdf:type rdfs:Class ;
+          rdfs:subClassOf :Odeur ;
+          rdfs:label "Dairy"@en ,
+                     "Lactique"@fr .
+
+
+
+
+
+#Lactone
+:Lactone rdf:type rdfs:Class ;
+         rdfs:subClassOf :Odeur ;
+         :synonyme "Lactonic"@en ;
+         rdfs:label "Lactone"@en ,
+                    "Lactoné"@fr .
+
+
+
+
+
+#Lavande
+:Lavande rdf:type rdfs:Class ;
+         rdfs:subClassOf :Fleur_d_arbuste ;
+         rdfs:label "Lavande"@fr ,
+                    "Lavender"@en .
+
+
+#Legume
+:Legume rdf:type rdfs:Class ;
+        rdfs:subClassOf :Vegetal ;
+        rdfs:label "Légume"@fr ,
+                   "Vegetable"@en .
+
+
+#Legume_Vert
+:Legume_Vert rdf:type rdfs:Class ;
+             rdfs:subClassOf :Legume ;
+             rdfs:label "Green Vegetable"@en ,
+                        "Légume Vert"@fr .
+
+
+
+
+#Legumes_Cuits
+:Legumes_Cuits rdf:type rdfs:Class ;
+               rdfs:subClassOf :Cuit ;
+               rdfs:label "Cooked Vegetables"@en ,
+                          "Légumes Cuits"@fr .
+
+
+#Levure
+:Levure rdf:type rdfs:Class ;
+        rdfs:subClassOf :Fermentaire ;
+        rdfs:label "Levure"@fr ,
+                   "Yeast"@en .
+
+
+#Malte
+:Malte rdf:type rdfs:Class ;
+       rdfs:subClassOf :Odeur ;
+       rdfs:label "Malt"@en ,
+                  "Malté"@fr .
+
+
+
+
+#Marin
+:Marin rdf:type rdfs:Class ;
+       rdfs:subClassOf :Frais ;
+       rdfs:label "Marin"@fr ,
+                  "Marine"@en .
+
+
+#Medicinal
+:Medicinal rdf:type rdfs:Class ;
+           rdfs:subClassOf :Chimique ,
+                           :Phenole ;
+           rdfs:label "Medicinal"@en ,
+                      "Médicinal"@fr .
+
+
+
+
+#Menthe
+:Menthe rdf:type rdfs:Class ;
+        rdfs:subClassOf :Frais ,
+                        :Vegetal_Vert ;
+        rdfs:label "Menthé"@fr ,
+                   "Minty"@en .
+
+
+
+
+#Metal
+:Metal rdf:type rdfs:Class ;
+       rdfs:subClassOf :Mineral ;
+       rdfs:label "Metal"@en ,
+                  "Métal"@fr .
+
+
+#Mielle
+:Mielle rdf:type rdfs:Class ;
+        rdfs:subClassOf :Doux ;
+        rdfs:label "Honeyed"@en ,
+                   "Miellé"@fr .
+
+
+#Mineral
+:Mineral rdf:type rdfs:Class ;
+         rdfs:subClassOf :Odeur ;
+         rdfs:label "Mineral"@en ,
+                    "Minéral"@fr .
+
+
+
+
+
+#Moisi
+:Moisi rdf:type rdfs:Class ;
+       rdfs:subClassOf :Fermentaire ;
+       rdfs:label "Moisi"@fr ,
+                  "Musty"@en .
+
+
+
+#Moutarde
+:Moutarde rdf:type rdfs:Class ;
+          rdfs:subClassOf :Crucifere ;
+          rdfs:label "Moutarde"@fr ,
+                     "Mustard"@en .
+
+
+#Musque
+:Musque rdf:type rdfs:Class ;
+        rdfs:subClassOf :Animal ;
+        rdfs:label "Musky"@en ,
+                   "Musqué"@fr .
+
+
+#Odeur
+:Odeur rdf:type rdfs:Class ;
+       rdfs:label "Odeur"@fr ,
+                  "Odor"@en .
+
+
+#Oeuf
+:Oeuf rdf:type rdfs:Class ;
+      rdfs:subClassOf :Animal ;
+      rdfs:label "Egg"@en ,
+                 "Œuf"@fr .
+
+
+#Oleagineux
+:Oleagineux rdf:type rdfs:Class ;
+            rdfs:subClassOf :Fruit_Sec ,
+                            :Gras ;
+            rdfs:label "Oleaginous"@en ,
+                       "Oléagineux"@fr .
+
+
+
+
+#Orange
+:Orange rdf:type rdfs:Class ;
+        rdfs:subClassOf :Agrume ;
+        rdfs:label "Orange"@en ,
+                   "Orange"@fr .
+
+
+#Pain
+:Pain rdf:type rdfs:Class ;
+      rdfs:subClassOf :Cereale ,
+                      :Cuit ;
+      :synonyme "bready"@en;
+      rdfs:label "Bread"@en ,
+                 "Pain"@fr .
+
+
+#Peponide
+:Peponide rdf:type rdfs:Class ;
+          rdfs:subClassOf :Fruite ;
+          rdfs:label "Peponide"@en ,
+                     "Peponide"@fr .
+
+
+#Phenole
+:Phenole rdf:type rdfs:Class ;
+         rdfs:subClassOf :Odeur ;
+         rdfs:label "Phenolic"@en ,
+                    "Phénolé"@fr .
+
+
+#Pied
+:Pied rdf:type rdfs:Class ;
+      rdfs:subClassOf
+                      :Fermentaire ;
+
+      rdfs:label "Foot"@en ,
+                 "Pied"@fr .
+
+
+#Pin
+:Pin rdf:type rdfs:Class ;
+     rdfs:subClassOf :Frais ,
+                     :Phenole ,
+                     :Resineux ;
+     rdfs:label "Pin"@fr ,
+                "Pine"@en .
+
+
+#Plante_Aromatique
+:Plante_Aromatique rdf:type rdfs:Class ;
+                   rdfs:subClassOf :Vegetal_Vert ;
+                   rdfs:label "Aromatic Plant"@en ,
+                              "Plante Aromatique"@fr .
+
+
+
+#Poisson
+:Poisson rdf:type rdfs:Class ;
+         rdfs:subClassOf :Amine ;
+         rdfs:label "Fish"@en ,
+                    "Poisson"@fr .
+
+
+#Poivre
+:Poivre rdf:type rdfs:Class ;
+        rdfs:subClassOf :Epice ;
+        rdfs:label "Pepper"@en ,
+                   "Poivre"@fr .
+
+
+#Pomme
+:Pomme rdf:type rdfs:Class ;
+       rdfs:subClassOf :Fruit_a_Pepins ;
+       rdfs:label "Apple"@en ,
+                  "Pomme"@fr .
+
+
+#Pomme_De_Terre
+:Pomme_De_Terre rdf:type rdfs:Class ;
+                rdfs:subClassOf :Legume ;
+                rdfs:label "Pomme De Terre"@fr ,
+                           "Potato"@en .
+
+
+#Poulailler
+:Poulailler rdf:type rdfs:Class ;
+            rdfs:subClassOf :Animal ;
+            rdfs:label "Chicken Coup"@en ,
+                       "Poulailler"@fr .
+
+
+#Produit_Petrolier
+:Produit_Petrolier rdf:type rdfs:Class ;
+                   rdfs:subClassOf :Chimique ;
+                   rdfs:label "Petroleum"@en ,
+                              "Produit Pétrolier"@fr .
+
+
+#Pyrazique
+:Pyrazique rdf:type rdfs:Class ;
+           rdfs:subClassOf :Empyreumatique ;
+           rdfs:label "Pyrazic"@en ,
+                      "Pyrazique"@fr .
+
+
+#Racine
+:Racine rdf:type rdfs:Class ;
+        rdfs:subClassOf :Legume ,
+                        :Terreux ;
+        rdfs:label "Racine"@fr ,
+                   "Root"@en .
+
+
+#Rance
+:Rance rdf:type rdfs:Class ;
+       rdfs:subClassOf :Gras ;
+       rdfs:label "Rance"@fr ,
+                  "Rancid"@en .
+
+
+#Resineux
+:Resineux rdf:type rdfs:Class ;
+          rdfs:subClassOf :Bois ;
+          rdfs:label "Resinous"@en ,
+                     "Résineux"@fr .
+
+
+
+
+
+#Solvant
+:Solvant rdf:type rdfs:Class ;
+         rdfs:subClassOf :Chimique,
+                         :Frais;
+         rdfs:label "Solvant"@fr ,
+                    "Solvent"@en .
+
+
+#Soufre
+:Soufre rdf:type rdfs:Class ;
+        rdfs:subClassOf :Odeur ;
+        rdfs:label "Soufré"@fr ,
+                   "Sulphurous"@en .
+
+
+
+
+
+#Sucre_Cuit
+:Sucre_Cuit rdf:type rdfs:Class ;
+            rdfs:subClassOf :Cuit,
+                            :Doux ;
+            rdfs:label "Cooked Sugar"@en ,
+                       "Sucre Cuit"@fr .
+
+
+
+
+
+#Terreux
+:Terreux rdf:type rdfs:Class ;
+         rdfs:subClassOf :Odeur ;
+         rdfs:label "Earthy"@en ,
+                    "Terreux"@fr .
+
+
+
+#Torrefie
+:Torrefie rdf:type rdfs:Class ;
+          rdfs:subClassOf :Empyreumatique ;
+          rdfs:label "Roasted"@en ,
+                     "Torréfié"@fr .
+
+
+#urine_de_chat
+:urine_de_chat rdf:type rdfs:Class ;
+               rdfs:subClassOf :Animal ;
+               :synonyme "catty"@en;
+               rdfs:label "cat urine"@en ,
+                          "urine de chat"@fr .
+
+
+#Vegetal
+:Vegetal rdf:type rdfs:Class ;
+         rdfs:subClassOf :Odeur ;
+         rdfs:label "Vegetal"@en ,
+                    "Végétal"@fr .
+
+
+#Vegetal_Sec
+:Vegetal_Sec rdf:type rdfs:Class ;
+             rdfs:subClassOf :Vegetal ;
+             rdfs:label "Dry Vegetal"@en ,
+                        "Végétal Sec"@fr .
+
+
+
+
+#Vegetal_Vert
+:Vegetal_Vert rdf:type rdfs:Class ;
+              rdfs:subClassOf :Vegetal ;
+              rdfs:label "Green Vegetal"@en ,
+                         "Vegetal Vert"@fr .
+
+
+
+
+#Vert_Pyrazique
+:Vert_Pyrazique rdf:type rdfs:Class ;
+                rdfs:subClassOf :Legume_Vert ;
+                rdfs:label "Pyrazic Green"@en ,
+                           "Vert Pyrazique"@fr .
+
+
+#Viande_Cuite
+:Viande_Cuite rdf:type rdfs:Class ;
+              rdfs:subClassOf :Cuit ;
+              rdfs:label "Cooked Meat"@en ,
+                         "Viande Cuite"@fr .
+
+
+#Viande_Fumee
+:Viande_Fumee rdf:type rdfs:Class ;
+              rdfs:subClassOf :Fume ;
+              rdfs:label "Smoked Meat"@en ,
+                         "Viande Fumée"@fr .
+
+#zesté agrume
+:Zeste_agrume rdf:type rdfs:Class ;
+              rdfs:subClassOf :Agrume;
+              :synonyme "zeste agrume"@fr ,
+                         "citrus rind"@en ;
+              rdfs:label "citrus peel"@en ,
+                         "zesté agrume"@fr .
+#################################################################
+#    Individuals
+#################################################################
+
+#abricot
+:abricot a
+                  :Fruit_a_Noyau ,
+                  :Lactone ;
+         rdfs:label "abricot"@fr ,
+                    "apricot"@en .
+
+
+#abricot_sec
+:abricot_sec a
+                      :Fruit_Sec ;
+             rdfs:label "abricot sec"@fr ,
+                        "aried apricot"@en .
+
+
+#absinthe
+:absinthe a
+                   :Anise ;
+          :synonyme "wormwood"@en;
+          rdfs:label "absinthe"@fr ,
+                     "absinthe"@en .
+
+
+#acajou
+:acajou a
+                 :Bois ;
+        rdfs:label "acajou"@fr ,
+                   "mahogany"@en .
+
+
+#acetone
+:acetone a
+                  :Solvant ;
+         rdfs:label "acetone"@en ,
+                    "acétone"@fr .
+
+
+#acrylate
+:acrylate a
+                   :Chimique ;
+          rdfs:label "acrylate"@en ,
+                     "acrylate"@fr .
+
+
+#agneau
+:agneau a
+                 :Animal ;
+        rdfs:label "agneau"@fr ,
+                   "lamb"@en .
+
+
+#aiguille de sapin
+:aiguille_de_sapin a
+                 :Pin;
+       rdfs:label "aiguille de sapin"@fr,
+                  "fir needle"@en.
+
+#ail
+:ail a
+              :Alliace ;
+     rdfs:label "ail"@fr ,
+                "garlic"@en .
+
+
+#airelle
+:airelle a
+                  :Baie ;
+         rdfs:label "airelle"@fr ,
+                    "huckleberry"@en .
+
+
+
+#alcool
+:alcool a
+                  :Medicinal,
+                  :Solvant ;
+         :synonyme "alcoholic"@en;
+         rdfs:label "alcool"@fr ,
+                    "alcohol"@en .
+
+
+#algue
+:algue a
+                :Marin ;
+       rdfs:label "algue"@fr ,
+                  "seaweed"@en .
+
+
+
+
+#amande
+:amande a
+                 :Amande_Amere,
+                 :Fruit_a_Coque ;
+        rdfs:label "almond"@en ,
+                   "amande"@fr .
+
+
+#amande_torrefiee
+:amande_torrefiee a
+                           :Fruit_a_Coque_Torrefie ;
+                  rdfs:label "amande torréfiée"@fr ,
+                             "roasted almond"@en .
+
+
+#ambre
+:ambre a
+                :Balsamique ;
+       rdfs:label "amber"@en ,
+                  "ambré"@fr .
+
+
+#ambre_gris
+:ambre_gris a
+                     :Animal ,
+                     :Boise ;
+            rdfs:label "ambergris"@en ,
+                       "ambre gris"@fr .
+
+
+#ambrette
+:ambrette a
+                   :Musque ,
+                   :Vegetal_Vert ;
+          rdfs:label "ambrette"@en ,
+                     "ambrette"@fr .
+
+
+#ammoniaque
+:ammoniaque a
+                     :Amine ,
+                     :Chimique ;
+            rdfs:label "ammonia"@en ,
+                       "ammoniaque"@fr .
+
+
+#amylique
+:amylique a
+                   :Fruite ;
+          :synonyme "fusel"@en ;
+          rdfs:label "amylic"@en ,
+                     "amylique"@fr .
+
+
+#ananas
+:ananas a
+                 :Fruit_Exotique ;
+        rdfs:label "ananas"@fr ,
+                   "pineapple"@en .
+
+
+#aneth
+:aneth a
+                :Anise ,
+                :Plante_Aromatique ;
+       rdfs:label "aneth"@fr ,
+                  "dill"@en .
+
+
+#angelique
+:angelique a
+                    :Vegetal_Vert ;
+           rdfs:label "angelica"@en ,
+                      "angélique"@fr .
+
+
+#anis
+:anis a
+               :Anise ,
+               :Epice ,
+               :Plante_Aromatique ;
+      rdfs:label "anis"@fr ,
+                 "anise"@en .
+
+
+#artichaut
+:artichaut a
+                    :Legume ;
+           rdfs:label "artichaut"@fr ,
+                      "artichoke"@en .
+
+
+#ase_fetide
+:ase_fetide a
+                     :Soufre ;
+            rdfs:label "asafetida"@en ,
+                       "ase fétide"@fr .
+
+
+#asperge
+:asperge a
+                  :Legume ;
+         rdfs:label "asparagus"@en ,
+                    "asperge"@fr .
+
+
+#aubepine
+:aubepine a
+                   :Fleur_d_arbuste ;
+          rdfs:label "aubépine"@fr ,
+                     "hawthorn"@en .
+
+
+#babeurre
+:babeurre a
+                   :Lacte ;
+          rdfs:label "babeurre"@fr ,
+                     "buttermilk"@en .
+
+
+#bacon
+:bacon a
+                :Viande_Fumee ;
+       rdfs:label "bacon"@en ,
+                  "bacon"@fr .
+
+
+#badiane
+:badiane a
+                  :Anise ,
+                  :Epice ;
+         rdfs:label "badian"@en ,
+                    "badiane"@fr .
+
+
+
+
+#banane_verte
+:banane_verte a
+                       :Banane ;
+              rdfs:label "banane verte"@fr ,
+                         "unripe banana"@en .
+
+
+#barbe_a_papa
+:barbe_a_papa a
+                       :Sucre_Cuit ;
+              rdfs:label "barbe à papa"@fr ,
+                         "cotton candy"@en .
+
+
+#basilic
+:basilic a
+                  :Plante_Aromatique ;
+         rdfs:label "basil"@en ,
+                    "basilic"@fr .
+
+
+
+#baume de tolu
+:baume_de_tolu a
+               :Balsamique ;
+        rdfs:label "baume de tolu"@fr ,
+                   "tolu balsam"@en .
+
+#benjoin
+:benjoin a
+                  :Resineux ;
+         rdfs:label "benjoin"@fr ,
+                    "benzoin"@en .
+
+
+#bergamote
+:bergamote a
+                    :Citronne ;
+           rdfs:label "bergamot"@en ,
+                      "bergamote"@fr .
+
+
+#betterave
+:betterave a
+                    :Racine ;
+           rdfs:label "beet"@en ,
+                      "betterave"@fr .
+
+
+#beurre_de_cacahuete
+:beurre_de_cacahuete a
+                              :Cacahuete ;
+                     rdfs:label "beurre de cacahuète"@fr ,
+                                "peanut butter"@en .
+
+
+#beurre_fondu
+:beurre_fondu a
+                       :Beurre ;
+              rdfs:label "beurre fondu"@fr ,
+                         "melted butter"@en .
+
+
+#beurre_frais
+:beurre_frais a
+                       :Beurre ;
+              rdfs:label "beurre frais"@fr ,
+                         "fresh butter"@en .
+
+
+#beurre_rance
+:beurre_rance a
+                       :Beurre ,
+                       :Rance ;
+              rdfs:label "beurre rance"@fr ,
+                         "butter rancid"@en .
+
+
+#biere
+:biere a
+                :Boisson_Fermentee ,
+                :Levure,
+                :Malte ;
+       rdfs:label "bière"@fr ,
+                  "root beer"@en .
+
+
+#ble
+:ble a
+              :Cereale ;
+     rdfs:label "blé"@fr ,
+                "wheat"@en .
+
+
+#boeuf_cuit
+:boeuf_cuit a
+                     :Viande_Cuite ;
+            rdfs:label "bœuf cuit"@fr ,
+                       "roast beef"@en .
+
+
+#bois_brule
+:bois_brule a
+                     :Brule ,
+                     :Fume ;
+            rdfs:label "bois brûlé"@fr ,
+                       "burnt wood"@en .
+
+
+#bois_d_agar
+:bois_d_agar a
+                      :Resineux ;
+             rdfs:label "agarwood"@en ,
+                        "bois d'agar"@fr .
+
+
+#bois de guaiac
+:bois_de_guaiac a
+                           :Bois ,
+                           :Balsamique ,
+                           :Fume ;
+                :synonyme "guaiacwood"@en;
+                rdfs:label "bois de guaïac"@fr ,
+                           "guaiacwood"@en .
+
+
+#bois de rose
+:bois_de_rose a
+                      :Bois;
+            rdfs:label "bois de rose"@en ,
+                       "bois de rose"@fr .
+#bonbon
+:bonbon a
+                 :Sucre_Cuit ;
+        rdfs:label "bonbon"@fr ,
+                   "candy"@en .
+
+
+#boronia
+:boronia a
+                  :Anise ,
+                  :Fleur_d_arbuste ;
+         rdfs:label "boronia"@en ,
+                    "boronia"@fr .
+
+
+#bouillon_de_legumes
+:bouillon_de_legumes a
+                              :Bouillon ;
+                     rdfs:label "bouillon de légumes"@fr ,
+                                "soup"@en .
+
+
+#bouillon_de_viande
+:bouillon_de_viande a
+                             :Bouillon ;
+                    rdfs:label "bouillon de viande"@fr ,
+                               "meat broth"@en .
+
+
+#bourgeon_de_cassis
+:bourgeon_de_cassis a
+                             :Vegetal_Vert ;
+                    rdfs:label "black currant bud"@en ,
+                               "bourgeon de cassis"@fr .
+
+
+#brandy
+:brandy a
+                 :Doux ;
+        rdfs:label "brandy"@en ,
+                   "brandy"@fr .
+
+
+#brocoli
+:brocoli a
+                 :Chou ;
+       rdfs:label "brocoli"@fr ,
+                  "broccoli"@en .
+
+
+#bruyere
+:bruyere a
+                  :Vegetal_Vert ;
+         rdfs:label "bruyère"@fr ,
+                    "heather"@en .
+
+
+#buchu
+:buchu a
+                :Plante_Aromatique ;
+       rdfs:label "buchu"@en ,
+                  "buchu"@fr .
+
+
+#buis
+:buis a
+               :Vegetal_Vert ;
+      rdfs:label "box tree"@en ,
+                 "buis"@fr .
+
+
+#cacahuète torrifié
+:cacahuete_torrifie a
+               :Fruit_a_Coque_Torrefie ;
+     rdfs:label "cacahuète torrifiée"@fr ,
+                "roasted peanut"@en .
+
+
+#cafe
+:cafe a
+               :Empyreumatique ;
+      rdfs:label "café"@fr ,
+                 "coffee"@en .
+
+
+#cafe_torrifie
+:cafe_torrifie a
+               :Torrefie  ;
+      rdfs:label "café torrifié"@fr ,
+                 "roasted coffee"@en .
+
+
+#calamus
+:calamus a
+                  :Doux ,
+                  :Epice ,
+                  :Vegetal_Vert ;
+         rdfs:label "calamus"@en ,
+                    "calamus"@fr .
+
+
+#camembert
+:camembert a
+                    :Fromage ,
+                    :Soufre ;
+           rdfs:label "camembert"@fr ,
+                      "camembert cheese"@en .
+
+
+#camomille
+:camomille a
+                    :Fleur_Du_Jardin ;
+           rdfs:label "camomille"@fr ,
+                      "chamomile"@en .
+
+
+#canneberge
+:canneberge a
+                     :Baie ;
+            rdfs:label "canneberge"@fr ,
+                       "cranberry"@en .
+
+
+#cannelle
+:cannelle a
+                   :Boise ,
+                   :Epice ,
+                   :Medicinal ;
+          :synonyme "cinnamyl"@en ,
+                    "cinnamol"@en ;
+          rdfs:label "cannelle"@fr ,
+                     "cinnamon"@en .
+
+
+#caoutchouc
+:caoutchouc a
+                     :Chimique ,
+                     :Soufre ;
+            rdfs:label "caoutchouc"@fr ,
+                       "rubbery"@en .
+
+
+#capres
+:capres a
+                 :Acetique ;
+        rdfs:label "capers"@en ,
+                   "câpres"@fr .
+
+
+#capucine
+:capucine a
+                   :Fleur_Du_Jardin ;
+          rdfs:label "capucine"@fr ,
+                     "nasturtium"@en .
+
+
+#carambole
+:carambole a
+                    :Fruit_Exotique ;
+           rdfs:label "carambole"@fr ,
+                      "starfruit"@en .
+
+
+#caramel_au_beurre
+:caramel_au_beurre a
+                            :Beurre ,
+                            :Caramel ;
+                   rdfs:label "caramel au beurre"@fr ,
+                              "toffee"@en .
+
+
+#carbonise
+:carbonise a
+                    :Brule ;
+           rdfs:label "carbonisé"@fr ,
+                      "charred"@en .
+
+
+#cardamome
+:cardamome a
+                    :Epice ;
+           rdfs:label "cardamom"@en ,
+                      "cardamome"@fr .
+
+
+#carotte
+:carotte a
+                  :Racine ;
+         rdfs:label "carotte"@fr ,
+                    "carrot"@en .
+
+
+#carton
+:carton a
+                 :Mineral ;
+        rdfs:label "cardboard"@en ,
+                   "carton"@fr .
+
+
+#carvi
+:carvi a
+                :Anise ,
+                :Epice ;
+       rdfs:label "caraway"@en ,
+                  "carvi"@fr .
+
+
+#carvone
+:carvone a
+                  :Anise ,
+                  :Menthe ;
+         rdfs:label "carvone"@en ,
+                    "carvone"@fr .
+
+
+#cassis
+:cassis a
+                 :Baie ,
+                 :Fruit_Noir ;
+        rdfs:label "black currant"@en ,
+                   "cassis"@fr .
+
+
+#castoreum
+:castoreum a
+                    :Animal ;
+           rdfs:label "castoreum"@en ,
+                      "castoréum"@fr .
+
+
+#cedre
+:cedre a
+                :Resineux ;
+       :synonyme "cedar"@en ;
+       rdfs:label "cedarwood"@en ,
+                  "cèdre"@fr .
+
+
+#céléri
+:celeri a
+                :Plante_Aromatique ;
+        rdfs:label "celery"@en ,
+                   "céléri"@fr .
+
+
+#cerise au marasquin
+:cerise_au_marasquin a
+                   :cerise   ;
+          rdfs:label "cerise_au_marasquin"@fr ,
+                     "maraschino cherry"@en .
+
+
+#chamallow
+:chamallow a
+                    :Sucre_Cuit ,
+                    :Fleur_d_oranger ;
+           rdfs:label "chamallow"@fr ,
+                      "marshmallow"@en .
+
+
+#champignon_blanc
+:champignon_blanc a
+                    :Champignon ;
+           rdfs:label "champignon blanc"@fr ,
+                      "white mushroom"@en .
+
+
+#chataigne
+:chataigne a
+                    :Grille ;
+           rdfs:label "chervil"@en ,
+                      "châtaigne"@fr .
+
+
+#cheminee
+:cheminee a
+                   :Fume ;
+          rdfs:label "cheminée"@fr ,
+                     "chimney"@en .
+
+
+#chene
+:chene a
+                :Bois ;
+       rdfs:label "chêne"@fr ,
+                  "woody oak wood"@en .
+
+
+#chevre
+:chevre a
+                 :Animal ;
+        rdfs:label "chèvre"@fr ,
+                   "goaty"@en .
+
+
+#chevrefeuille
+:chevrefeuille a
+                        :Fleur_d_arbuste ;
+               rdfs:label "chèvrefeuille"@fr ,
+                          "honeysuckle"@en .
+
+
+#chicoree
+:chicoree a
+                   :Torrefie ;
+          rdfs:label "chicory"@en ,
+                     "chicorée"@fr .
+
+
+#chien_mouille
+:chien_mouille a
+                        :Animal ;
+               rdfs:label "chien mouillé"@fr ,
+                          "wet dog"@en .
+
+
+#chips
+:chips a
+                :Friture ;
+       rdfs:label "chips"@fr ,
+                  "potato chip"@en .
+
+
+#chlorophylle
+:chlorophylle a
+                       :Menthe ;
+              rdfs:label "chlorophyll"@en ,
+                         "chlorophylle"@fr .
+
+
+#chocolat
+:chocolat a
+                   :Cacao,
+                   :Doux,
+                   :Lacte ;
+          rdfs:label "chocolat"@fr ,
+                     "chocolate"@en .
+
+
+#chocolat_noir
+:chocolat_noir a
+                        :Cacao,
+                        :Doux ;
+               rdfs:label "chocolat noir"@fr ,
+                          "dark chocolate"@en .
+
+
+#chou_fleur
+:chou_fleur a
+                     :Chou ;
+            rdfs:label "cauliflower"@en ,
+                       "chou-fleur"@fr .
+
+
+#choucroute
+:choucroute a
+                     :Chou ,
+                     :Fermentaire ;
+            rdfs:label "choucroute"@fr ,
+                       "sauerkraut"@en .
+
+
+#chrysantheme
+:chrysantheme a
+                       :Fleur_Du_Jardin ;
+              rdfs:label "chrysanthemum"@en ,
+                         "chrysanthème"@fr .
+
+
+#ciboulette
+:ciboulette a
+                     :Alliace ,
+                     :Plante_Aromatique ;
+            rdfs:label "chive"@en ,
+                       "ciboulette"@fr .
+
+
+#cidre
+:cidre a
+                :Boisson_Fermentee ,
+                :Fruite ;
+       rdfs:label "cider"@en ,
+                  "cidre"@fr .
+
+
+#cigarette
+:cigarette a
+                    :Brule ;
+           rdfs:label "cigarette"@en ,
+                      "cigarette"@fr .
+
+
+#cire_d_abeille
+:cire_d_abeille a
+                         :Mielle ;
+                rdfs:label "beeswax"@en ,
+                           "cire d'abeille"@fr .
+
+
+#ciste
+:ciste a
+                :Balsamique ;
+       rdfs:label "ciste"@fr ,
+                  "cistus"@en .
+
+
+#citron
+:citron a
+                 :Citronne ;
+        rdfs:label "citron"@fr ,
+                   "lemon"@en .
+
+
+#citron_vert
+:citron_vert a
+                      :Citronne ;
+             rdfs:label "citron vert"@fr ,
+                        "lime"@en .
+
+
+#citronelle
+:citronelle a
+                     :Citronne ,
+                     :Plante_Aromatique ;
+            :synonyme "citronella"@en ;
+            rdfs:label "citronelle"@fr ,
+                       "lemongrass"@en .
+
+
+#citrouille
+:citrouille a
+                     :Cucurbitacee ;
+            rdfs:label "citrouille"@fr ,
+                       "pumpkin"@en .
+
+
+#civette
+:civette a
+                  :Musque ;
+         rdfs:label "civet"@en ,
+                    "civette"@fr .
+
+
+#clementine
+:clementine a
+                     :Agrume ;
+            rdfs:label "clementine"@en ,
+                       "clémentine"@fr .
+
+
+#clou_de_girofle
+:clou_de_girofle a
+                          :Epice ,
+                          :Medicinal ;
+                 rdfs:label "clou de girofle"@fr ,
+                            "clove"@en .
+
+
+#cognac
+:cognac a
+                 :Alcool_De_Fut ;
+        rdfs:label "cognac"@en ,
+                   "cognac"@fr .
+
+
+#coing
+:coing a
+                :Fruit_a_Pepins ;
+       rdfs:label "coing"@fr ,
+                  "quince"@en .
+
+
+#compote
+:compote a
+                  :Fruit_Cuit,
+                  :Sucre_Cuit ;
+         rdfs:label "compote"@en ,
+                    "compote"@fr .
+
+
+#concombre
+:concombre a
+                    :Aldehyde ,
+                    :Aldehyde_frais ,
+                    :Cucurbitacee ;
+           rdfs:label "concombre"@fr ,
+                      "cucumber"@en .
+
+
+#confiture
+:confiture a
+                    :Fruit_Cuit ,
+                    :Sucre_Cuit ;
+           rdfs:label "confiture"@fr ,
+                      "jammy"@en .
+
+
+#cookie
+:cookie a
+                 :Biscuit ;
+        rdfs:label "cookie"@en ,
+                   "cookie"@fr .
+
+
+#coquille_saint_jacques
+:coquille_saint_jacques a
+                                 :Coquillage ;
+                        rdfs:label "coquille saint jacques"@fr ,
+                                   "scallop"@en .
+
+
+#coriandre
+:coriandre a
+                    :Epice ,
+                    :Plante_Aromatique ;
+           :synonyme "cilantro"@en ;
+           rdfs:label "coriander"@en ,
+                      "coriandre"@fr .
+
+
+#costarde
+:costarde a
+                   :Creme ,
+                   :Doux ;
+          rdfs:label "costarde"@fr ,
+                     "custard"@en .
+
+
+#costus
+:costus a
+                   :Epice ,
+                   :Cuir ;
+        rdfs:label "costus"@fr ,
+                   "costus"@en .
+
+
+#courge
+:courge a
+                  :Cucurbitacee ;
+         rdfs:label "courge"@fr ,
+                    "squash"@en .
+
+
+#creme_fraiche
+:creme_fraiche a
+                  :Creme ;
+         rdfs:label "crème fraiche"@fr ,
+                    "fresh cream"@en .
+
+
+#cresson
+:cresson a
+                  :Crucifere ;
+         rdfs:label "cresson"@fr ,
+                    "watercress"@en .
+
+
+#crevette
+:crevette a
+                   :Fruit_De_Mer ;
+          rdfs:label "crevette"@fr ,
+                     "shrimp"@en .
+
+
+#croute_de_pain
+:croute_de_pain a
+                         :Grille ;
+                rdfs:label "bread crust"@en ,
+                           "croûte de pain"@fr .
+
+
+#cubebe
+:cubebe a
+                 :Boise ,
+                 :Camphre ;
+        rdfs:label "cubeb"@en ,
+                   "cubèbe"@fr .
+
+
+#cumin
+:cumin a
+                :Epice ;
+       rdfs:label "cumin"@en ,
+                  "cumin"@fr .
+
+
+#curcuma
+:curcuma a
+                  :Epice ;
+         rdfs:label "curcuma"@fr ,
+                    "turmeric"@en .
+
+
+#curry
+:curry a
+                :Epice ;
+       rdfs:label "curry"@en ,
+                  "curry"@fr .
+
+
+#cyclamen
+:cyclamen a
+                   :Fleur_Du_Jardin ;
+          rdfs:label "cyclamen"@en ,
+                     "cyclamen"@fr .
+
+
+#cypres
+:cypres a
+                 :Resineux ;
+        rdfs:label "cypress"@en ,
+                   "cyprès"@fr .
+
+
+#datte
+:datte a
+                :Fruit_Sec ;
+       rdfs:label "date"@en ,
+                  "datte"@fr .
+
+
+#davana
+:davana a
+                :Plante_Aromatique ,
+                :Boise ,
+                :Animal ;
+      rdfs:label "davana"@en ,
+                 "davana"@fr.
+
+
+#dinde_cuite
+:dinde_cuite a
+                      :Viande_Cuite ;
+             rdfs:label "dinde cuite"@fr ,
+                        "turkey"@en .
+
+
+#durian
+:durian a
+                 :Animal ,
+                 :Fermentaire ;
+        rdfs:label "durian"@en ,
+                   "durian"@fr .
+
+
+#eau_de_cologne
+:eau_de_cologne a
+                         :Frais ;
+                rdfs:label "cologne"@en ,
+                           "eau de cologne"@fr .
+
+
+#eau_de_javel
+:eau_de_javel a
+                       :Chlore ;
+              rdfs:label "bleach"@en ,
+                         "eau de javel"@fr .
+
+
+#echalote
+:echalote a
+                   :Alliace ;
+          rdfs:label "shallot"@en ,
+                     "échalote"@fr .
+
+
+#ecorce_d_orange
+:ecorce_d_orange a
+                          :Orange ,
+                          :zeste ;
+                 rdfs:label "orange rind"@en ,
+                            "écorce d'orange"@fr .
+
+
+#ecurie
+:ecurie a
+                          :Animal,
+                          :Phenole ;
+                 rdfs:label "stable"@en ,
+                            "écurie"@fr .
+
+
+#elemi
+:elemi a                  :Boise ,
+                          :Citronne ,
+                          :Poivre ;
+                 rdfs:label "elemi"@en ,
+                            "elemi"@fr .
+
+
+#encens
+:encens a
+                 :Boise ;
+        :synonyme "frankincense"@en;
+        rdfs:label "encens"@fr ,
+                   "incense"@en .
+
+
+#epinard
+:epinard a
+                  :Legume_Vert ;
+         rdfs:label "spinach"@en ,
+                    "épinard"@fr .
+
+
+#essence
+:essence a
+                  :Produit_Petrolier ;
+         rdfs:label "essence"@fr ,
+                    "gasoline"@en .
+
+
+#ester
+:ester a
+                :Fruite ;
+       rdfs:label "ester"@fr ,
+                  "estery"@en .
+
+
+#estragon
+:estragon a
+                   :Plante_Aromatique ;
+          rdfs:label "estragon"@fr ,
+                     "tarragon"@en .
+
+
+#ether
+:ether a
+                :Solvant ;
+       rdfs:label "ethereal"@en ,
+                  "éther"@fr .
+
+
+#eucalyptus
+:eucalyptus a
+                     :Bois,
+                     :Medicinal ,
+                     :Menthe ;
+            rdfs:label "eucalyptus"@en ,
+                       "eucalyptus"@fr .
+
+
+#farine
+:farine a
+                 :Cereale ;
+        rdfs:label "farine"@fr ,
+                   "flour"@en .
+
+
+#fecal
+:fecal a
+                :Animal ;
+       rdfs:label "fecal"@en ,
+                  "fécal"@fr .
+
+
+#fenouil
+:fenouil a
+                  :Anise ,
+                  :Legume_Vert,
+                  :Plante_Aromatique ;
+         rdfs:label "fennel"@en ,
+                    "fenouil"@fr .
+
+
+#fenugrec
+:fenugrec a
+                   :Anise ,
+                   :Plante_Aromatique ;
+          rdfs:label "fenugrec"@fr ,
+                     "fenugreek"@en .
+
+
+#feta
+:feta a
+               :Fromage ;
+      rdfs:label "feta cheese"@en ,
+                 "fêta"@fr .
+
+
+#feuille_de_geranium
+:feuille_de_geranium a
+                              :Vegetal_Vert ;
+                     rdfs:label "feuille de géranium"@fr ,
+                                "geranium leaf"@en .
+
+
+#feuille_de_tomate
+:feuille_de_tomate a
+                            :Vegetal_Vert ;
+                   rdfs:label "feuille de tomate"@fr ,
+                              "tomato leaf"@en .
+
+
+#feve
+:feve a
+                    :Legume_Vert ;
+         :synonyme "beany"@en ;
+         rdfs:label "bean"@en ,
+                    "fève"@fr .
+
+
+#feve_de_cacao
+:feve_de_cacao a
+                            :Cacao ;
+                   rdfs:label "fève de cacao"@fr ,
+                              "cocoa bean"@en .
+
+
+#feve_tonka
+:feve_tonka a
+                     :Coumarine ;
+            rdfs:label "fève tonka"@fr ,
+                       "tonka"@en .
+
+
+#figue
+:figue a
+                :Fruit_a_Pepins ;
+       rdfs:label "fig"@en ,
+                  "figue"@fr .
+
+
+#figue_seche
+:figue_seche a
+                      :Fruit_Sec ;
+             rdfs:label "dry fig"@en ,
+                        "figue sèche"@fr .
+
+
+#fioul
+:fioul a
+                :Produit_Petrolier ;
+       rdfs:label "fioul"@fr ,
+                  "fuel"@en .
+
+
+#fleur_d_acacia
+:fleur_d_acacia a
+                         :Fleur_d_arbre ;
+                rdfs:label "acacia"@en ,
+                           "fleur d'acacia"@fr .
+
+
+
+#fleur_de_sureau
+:fleur_de_sureau a
+                          :Fleur_d_arbuste ;
+                 rdfs:label "elderflower"@en ,
+                            "fleur de sureau"@fr .
+
+
+#fleur_de_tilleul
+:fleur_de_tilleul a
+                           :Fleur_d_arbre ;
+                  rdfs:label "fleur de tilleul"@fr ,
+                             "linden flower"@en .
+
+
+#fleur_de_troene
+:fleur_de_troene a
+                          :Fleur_d_arbuste ;
+                 rdfs:label "fleur de troëne"@fr ,
+                            "privet"@en .
+
+
+#foie
+:foie a
+               :Animal ;
+      rdfs:label "foie"@fr ,
+                 "liver"@en .
+
+
+#foin
+:foin a
+               :Vegetal_Sec ;
+      :synonyme "new mown hay"@en;
+      rdfs:label "foin"@fr ,
+                 "hay"@en .
+
+#foliage
+:feuille a
+               :Vegetal_Vert ;
+      :synonyme "foliage"@en ;
+      rdfs:label "feuille"@fr ,
+                 "leafy"@en .
+#fougere
+:fougere a
+                  :Vegetal_Vert ;
+         rdfs:label "fougere"@en ,
+                    "fougère"@fr .
+
+
+#foxe
+:foxe a
+               :Aldehyde ,
+               :Animal ;
+      rdfs:label "foxy"@en ,
+                 "foxé"@fr .
+
+
+#fraise
+:fraise a
+                 :Fruit_Rouge ;
+        rdfs:label "fraise"@fr ,
+                   "strawberry"@en .
+
+
+#framboise
+:framboise a
+                    :Fruit_Rouge ;
+           rdfs:label "framboise"@fr ,
+                      "raspberry"@en .
+
+
+#freesia
+:freesia a
+                  :Fleur_Du_Jardin ;
+         rdfs:label "freesia"@en ,
+                    "freesia"@fr .
+
+
+#fromage_de_chevre
+:fromage_de_chevre a
+                            :Fromage ;
+                   rdfs:label "cascarilla"@en ,
+                              "fromage de chèvre"@fr .
+
+
+#fromage_frais
+:fromage_frais a
+                            :Lacte ;
+                   rdfs:label "cottage cheese"@en ,
+                              "fromage frais"@fr .
+
+
+#fruit_de_la_passion
+:fruit_de_la_passion a
+                              :Fruit_Exotique ;
+                     rdfs:label "fruit de la passion"@fr ,
+                                "passion fruit"@en .
+
+
+#fumee
+:fumee a
+                :Fume ;
+       rdfs:label "fumée"@fr ,
+                  "smoky"@en .
+
+
+#galanga
+:galanga a
+                  :Citronne ,
+                  :Epice ;
+         rdfs:label "galanga"@en ,
+                    "galanga"@fr .
+
+
+#galbanum
+:galbanum a
+                   :Vegetal_Vert ;
+          rdfs:label "galbanum"@en ,
+                     "galbanum"@fr .
+
+
+#gardenia
+:gardenia a
+                   :Fleur_d_arbuste ;
+          rdfs:label "gardenia"@en ,
+                     "gardénia"@fr .
+
+
+#gâteau
+:gateau a
+            :Cuit ,
+            :patisserie ;
+        rdfs:label "cake"@en ,
+                   "gâteau"@fr .
+
+
+#gaultherie
+:gaultherie a
+            :Camphre ;
+       rdfs:label "gaultherie"@fr ,
+                  "wintergreen"@en .
+
+
+#gaz
+:gaz a
+              :Soufre ;
+     rdfs:label "gassy"@en ,
+                "gaz"@fr .
+
+
+#genet
+:genet a
+                :Fleur_d_arbuste ;
+       rdfs:label "genet"@en ,
+                  "genêt"@fr .
+
+
+#genevrier
+:genevrier a
+                    :Bois ;
+           rdfs:label "genévrier"@fr ,
+                      "juniper"@en .
+
+
+#geranium
+:geranium a
+                   :Fleur_Du_Jardin ;
+          rdfs:label "geranium"@en ,
+                     "géranium"@fr .
+
+
+#gingembre
+:gingembre a
+                    :Citronne ,
+                    :Epice ;
+           rdfs:label "gingembre"@fr ,
+                      "ginger"@en .
+
+
+#ginseng
+:ginseng a
+                  :Citronne ,
+                  :Epice ;
+         rdfs:label "ginseng"@en ,
+                    "ginseng"@fr .
+
+
+#goji
+:goji a
+               :Fruit_Sec ;
+      rdfs:label "goji"@fr ,
+                 "goji berry"@en .
+
+
+#gomme
+:gomme a
+              :Chimique ;
+     rdfs:label "gomme"@fr ,
+                "eraser"@en .
+
+
+#goudron
+:goudron a
+                  :Produit_Petrolier ;
+         rdfs:label "goudron"@fr ,
+                    "tar"@en .
+
+
+#goyave
+:goyave a
+                 :Fruit_Exotique ;
+        rdfs:label "goyave"@fr ,
+                   "guava"@en .
+
+
+#grain
+:grain a
+                :Cereale ;
+       rdfs:label "grain"@en ,
+                  "grain"@fr .
+
+
+#graines torréfiées
+:graines_torrefiees a
+                   :Torrefie ;
+       rdfs:label "roasted grain"@en ,
+                  "graines torréfiées"@fr .
+
+
+#graisse_de_poulet
+:graisse_de_poulet a
+                            :Graisse_Animale ;
+                   rdfs:label "chicken fat"@en ,
+                              "graisse de poulet"@fr .
+
+
+#grenade
+:grenade a
+                  :Fruite ;
+         rdfs:label "grenade"@fr ,
+                    "pomegranate"@en .
+
+
+#groseille
+:groseille a
+                    :Baie ;
+           rdfs:label "gooseberry"@en ,
+                      "groseille"@fr .
+
+
+#haricot_vert
+:haricot_vert a
+                       :Legume_Vert ;
+              rdfs:label "green bean"@en ,
+                         "haricot vert"@fr .
+
+
+#heliotrope
+:heliotrope a
+                     :Doux ,
+                     :Fleur_d_arbuste ;
+            rdfs:label "heliotrope"@en ,
+                       "héliotrope"@fr .
+
+
+#herbe
+:herbe a
+                :Aldehyde ,
+                :Aldehyde_frais ;
+       :synonyme "weedy"@en ,
+                 "grassy"@en ,
+                 "herbal"@en ;
+       rdfs:label "herbe"@fr ,
+                  "grass"@en .
+
+
+#hibiscus
+:hibiscus a
+                   :Fleur_d_arbuste ;
+          rdfs:label "hibiscus"@en ,
+                     "hibiscus"@fr .
+
+
+#houblon
+:houblon a
+                  :Cereale ;
+         rdfs:label "hops"@en ,
+                    "houblon"@fr .
+
+
+#huile
+:huile a
+                :Gras ;
+       rdfs:label "huile"@fr ,
+                  "oily"@en .
+
+
+#huile_rance
+:huile_rance a
+                      :Aldehyde ,
+                      :Rance ;
+             rdfs:label "huile rance"@fr ,
+                        "randic oil"@en .
+
+
+#huitre
+:huitre a
+                 :Coquillage ;
+        rdfs:label "huître"@fr ,
+                   "oyster"@en .
+
+
+#humus
+:humus a
+                :Moisi ,
+                :Terreux ;
+       rdfs:label "humus"@en ,
+                  "humus"@fr .
+
+
+#hyraceum
+:hyraceum a
+                   :Animal ;
+          rdfs:label "hyraceum"@en ,
+                     "hyraceum"@fr .
+
+
+#hysope
+:hysope a
+                 :Fleur_d_arbuste ;
+        rdfs:label "hysope"@fr ,
+                   "hyssop"@en .
+
+
+#immortelle
+:immortelle a
+                     :Fleur_d_arbuste ;
+            rdfs:label "immortelle"@en ,
+                       "immortelle"@fr .
+
+
+#insecte_ecrase
+:insecte_ecrase a
+                         :Aldehyde ,
+                         :Animal ;
+                rdfs:label "crushed bug"@en ,
+                           "insecte écrasé"@fr .
+
+
+#iode
+:iode a
+               :Marin ,
+               :Mineral ;
+      rdfs:label "iodine"@en ,
+                 "iodé"@fr .
+
+
+#iris
+:iris a
+               :Fleur_Du_Jardin ;
+      :synonyme "iris"@fr ;
+      rdfs:label "orris"@en ,
+                 "iris"@fr .
+
+
+#jacinthe
+:jacinthe a
+                   :Fleur_Du_Jardin ;
+          rdfs:label "hyacinth"@en ,
+                     "jacinthe"@fr .
+
+
+#jacquier
+:jacquier a
+                   :Fruit_Exotique ;
+          rdfs:label "jackfruit"@en ,
+                     "jacquier"@fr .
+
+
+#jambon
+:jambon a
+                 :Viande_Cuite ;
+        rdfs:label "ham"@en ,
+                   "jambon"@fr .
+
+
+#jasmin
+:jasmin a
+                 :Fleur_d_arbuste ;
+        rdfs:label "jasmin"@fr ,
+                   "jasmine"@en .
+
+
+#jaune_d_oeuf
+:jaune_d_oeuf a
+                       :Oeuf ;
+              rdfs:label "egg yolk"@en ,
+                         "jaune d'œuf"@fr .
+
+
+#jonquille
+:jonquille a
+                    :Fleur_Du_Jardin ;
+           rdfs:label "jonquil"@en ,
+                      "jonquille"@fr .
+
+
+#kiwi
+:kiwi a
+               :Fruit_a_Pepins ;
+      rdfs:label "kiwi"@en ,
+                 "kiwi"@fr .
+
+
+#kumquat
+:kumquat a
+                  :Agrume ;
+         rdfs:label "kumquat"@en ,
+                    "kumquat"@fr .
+
+
+#lait_chaud
+:lait_chaud a
+                     :Lacte ;
+            rdfs:label "hot milk"@en ,
+                       "lait chaud"@fr .
+
+
+#lait_cru
+:lait_cru a
+                    :Animal ;
+           rdfs:label "raw milk"@en ,
+                      "lait cru"@fr .
+
+
+#lait_frais
+:lait_frais a
+                     :Lacte ;
+            rdfs:label "lait frais"@fr ,
+                       "fresh milk"@en .
+
+
+#lait_fermente
+:lait_fermente a
+                    :Acetique ,
+                    :Lacte ;
+           rdfs:label "lait fermenté"@fr ,
+                      "fermented milk"@en .
+
+
+#laurier
+:laurier a
+                  :Plante_Aromatique ;
+         rdfs:label "laurel"@en ,
+                    "laurier"@fr .
+
+
+#lavandin
+:lavandin a
+                   :Lavande ;
+          rdfs:label "lavandin"@en ,
+                     "lavandin"@fr .
+
+
+#lilas
+:lilas a
+                :Fleur_d_arbuste ;
+       rdfs:label "lilac"@en ,
+                  "lilas"@fr .
+
+
+#limbourg
+:limbourg a
+                   :Fromage ,
+                   :Pied ;
+          rdfs:label "limbourg"@fr ,
+                     "limburger cheese"@en .
+
+
+#linge_humide
+:linge_humide a
+                       :Moisi ,
+                       :Terreux ;
+              rdfs:label "linge humide"@fr ,
+                         "wet cloth"@en .
+
+
+#litchi
+:litchi a
+                 :Floral,
+                 :Fruit_Exotique ;
+        rdfs:label "litchi"@fr ,
+                   "lychee"@en .
+
+
+#liveche
+:liveche a
+                  :Plante_Aromatique ;
+         rdfs:label "livèche"@fr ,
+                    "lovage"@en .
+
+
+#luzerne
+:luzerne a
+                  :Vegetal_Vert ;
+         rdfs:label "alfalfa"@en ,
+                    "luzerne"@fr .
+
+
+#lys
+:lys a
+              :Fleur_Du_Jardin ;
+     rdfs:label "lily"@en ,
+                "lys"@fr .
+
+
+#magnolia
+:magnolia a
+                   :Fleur_d_arbre ;
+          rdfs:label "magnolia"@en ,
+                     "magnolia"@fr .
+
+
+#mais
+:mais a
+               :Cereale ;
+      rdfs:label "corn"@en ,
+                 "maïs"@fr .
+
+
+#mandarine
+:mandarine a
+                    :Agrume ;
+           rdfs:label "mandarine"@fr ,
+                      "tangerine"@en .
+
+
+#mangue
+:mangue a
+                 :Fruit_Exotique ;
+        rdfs:label "mango"@en ,
+                   "mangue"@fr .
+
+
+#margarine
+:margarine a
+                    :Beurre ;
+           rdfs:label "margarine"@fr ,
+                      "margarine"@en .
+
+
+#marjolaine
+:marjolaine a
+                     :Plante_Aromatique ;
+            rdfs:label "marjolaine"@fr ,
+                       "marjoram"@en .
+
+
+#marrube
+:marrube a
+                  :Medicinal ,
+                  :Plante_Aromatique ;
+         rdfs:label "horehound"@en ,
+                    "marrube"@fr .
+
+
+#massepain
+:massepain a
+                    :Amande_Amere ;
+           rdfs:label "marzipan"@en ,
+                      "massepain"@fr .
+
+
+#mastic
+:mastic a
+                 :Chimique ;
+        rdfs:label "mastic"@en ,
+                   "mastic"@fr .
+
+
+#melasse
+:melasse a
+                  :Caramel ;
+         rdfs:label "molasses"@en ,
+                    "mélasse"@fr .
+
+
+#melon
+:melon a
+                :Peponide ;
+       rdfs:label "melon"@fr ,
+                  "melon"@en .
+
+
+#melon_jaune
+:melon_jaune a
+                      :Peponide ;
+             rdfs:label "canary melon"@en ,
+                        "melon jaune"@fr .
+
+
+#menthe
+:menthe a
+                 :Menthe ,
+                 :Plante_Aromatique ;
+        rdfs:label "menthe"@fr ,
+                   "mint"@en .
+
+
+#menthe_poivree
+:menthe_poivree a
+                         :Menthe ;
+                rdfs:label "menthe poivrée"@fr ,
+                           "peppermint"@en .
+
+
+#menthe_pouliot
+:menthe_pouliot a
+                         :Menthe ,
+                         :Plante_Aromatique ;
+                rdfs:label "menthe pouliot"@fr ,
+                           "pennyroyal"@en .
+
+
+#menthe_verte
+:menthe_verte a
+                       :Menthe ;
+              rdfs:label "menthe verte"@fr ,
+                         "spearmint"@en .
+
+
+#menthol
+:menthol a
+                  :Menthe ;
+         rdfs:label "menthol"@fr ,
+                    "mentholic"@en .
+
+
+#metallique
+:metallique a
+                     :Metal ;
+            rdfs:label "metallic"@en ,
+                       "métallique"@fr .
+
+
+#miel
+:miel a
+               :Mielle ;
+      rdfs:label "honey"@en ,
+                 "miel"@fr .
+
+
+#mimosa
+:mimosa a
+                 :Fleur_d_arbre ;
+        rdfs:label "mimosa"@en ,
+                   "mimosa"@fr .
+
+
+#moufette
+:moufette a
+                   :Musque ;
+          rdfs:label "moufette"@fr ,
+                     "skunk"@en .
+
+
+#moule
+:moule a
+                :Coquillage ;
+       rdfs:label "moule"@fr ,
+                  "mussel"@en .
+
+
+#mousse_de_chêne
+:mousse_de_chene a
+                 :Foret ;
+        rdfs:label "mousse de chêne"@fr ,
+                   "oakmoss"@en .
+
+#mousse
+:mousse a
+                 :Foret ;
+        :synonyme "mossy"@en;
+        rdfs:label "mousse"@fr ,
+                   "moss"@en .
+
+#mouton
+:mouton a
+                 :Animal ;
+        rdfs:label "mouton"@fr ,
+                   "mutton"@en .
+
+
+#mozarella
+:mozarella a
+                           :Lacte ;
+                  rdfs:label "mozarella"@en ,
+                             "mozarella"@fr .
+
+
+#muguet
+:muguet a
+                 :Fleur_Du_Jardin ;
+        :synonyme "lily of the valley"@en ;
+        rdfs:label "muguet"@en ,
+                   "muguet"@fr .
+
+
+#mure
+:mure a
+               :Fruit_Noir ,
+               :Fruit_Rouge ;
+      :synonyme "blackberry"@en;
+      rdfs:label "mulberry"@en ,
+                 "mûre"@fr .
+
+#mûroise
+:muroise a
+               :Fruit_Rouge ;
+      :synonyme "logan berry"@en ,
+                "mûre de logan"@fr ;
+      rdfs:label "boysenberry"@en ,
+                 "mûroise"@fr .
+
+
+#musc
+:musc a
+               :Musque ;
+      rdfs:label "musc"@fr ,
+                 "musk"@en .
+
+
+#myrrhe
+:myrrhe a
+                 :Boise ;
+        rdfs:label "myrrh"@en ,
+                   "myrrhe"@fr .
+
+
+#myrtille
+:myrtille a
+                   :Baie ,
+                   :Fruit_Noir ;
+          rdfs:label "blueberry"@en ,
+                     "myrtille"@fr .
+
+
+#naphtaline
+:naphtaline a
+                     :Produit_Petrolier ;
+            rdfs:label "naphtaline"@fr ,
+                       "naphthyl"@en .
+
+
+#narcisse
+:narcisse a
+                   :Fleur_Du_Jardin ;
+          rdfs:label "narcisse"@fr ,
+                     "narcissus"@en .
+
+
+#navet
+:navet a
+                :Crucifere ;
+       rdfs:label "navet"@fr ,
+                  "turnip"@en .
+
+
+#nectarine
+:nectarine a
+                    :Fruit_a_Noyau,
+                    :Lactone ;
+           rdfs:label "nectarine"@en ,
+                      "nectarine"@fr .
+
+
+#noisette
+:noisette a
+                   :Fruit_a_Coque ;
+          rdfs:label "hazelnut"@en ,
+                     "noisette"@fr .
+
+
+#noisette_torrefiee
+:noisette_torrefiee a
+                             :Fruit_a_Coque_Torrefie ;
+                    rdfs:label "noisette torréfiée"@fr ,
+                               "roasted hazelnut"@en .
+
+
+#noix
+:noix a
+               :Fruit_a_Coque ;
+      rdfs:label "noix"@fr ,
+                 "walnut"@en .
+
+
+#noix_de_cajou
+:noix_de_cajou a
+                        :Fruit_a_Coque ;
+               rdfs:label "cashew"@en ,
+                          "noix de cajou"@fr .
+
+
+#noix_de_coco
+:noix_de_coco a
+                       :Coumarine,
+                       :Fruit_Exotique ,
+                       :Oleagineux ;
+              rdfs:label "coconut"@en ,
+                         "noix de coco"@fr .
+
+
+#noix_de_macadamia
+:noix_de_macadamia a
+                            :Fruit_a_Coque ;
+                   rdfs:label "macadamia"@en ,
+                              "noix de macadamia"@fr .
+
+
+#noix_de_muscade
+:noix_de_muscade a
+                          :Epice ;
+                 rdfs:label "noix de muscade"@fr ,
+                            "nutmeg"@en .
+
+
+#noix_de_pecan
+:noix_de_pecan a
+                        :Fruit_a_Coque ;
+               rdfs:label "noix de pécan"@fr ,
+                          "pecan"@en .
+
+
+#noyaux_d_abricot
+:noyaux_d_abricot a
+                        :Amande_Amere ;
+               rdfs:label "noyaux d'abricot"@fr ,
+                          "apricot kernels"@en .
+
+
+#noyau_de_cerise
+:noyau_de_cerise a
+                        :Amande_Amere ;
+               rdfs:label "noyau de cerise"@fr ,
+                          "cherry pit"@en .
+
+#oeuf_pourri
+:oeuf_pourri a
+                  :Oeuf ,
+                  :Soufre;
+         rdfs:label "rotten egg"@en ,
+                    "œuf pourri"@fr .
+
+#oeillet
+:oeillet a
+                  :Fleur_Du_Jardin ;
+         rdfs:label "carnation"@en ,
+                    "œillet"@fr .
+
+
+#oignon
+:oignon a
+                 :Alliace ;
+        rdfs:label "onion"@en ,
+                   "oignon"@fr .
+
+
+#oignon_cuit
+:oignon_cuit a
+                      :Legumes_Cuits ;
+             rdfs:label "cooked onion"@en ,
+                        "oignon cuit"@fr .
+
+
+#oignon_vert
+:oignon_vert a
+                 :Alliace ;
+        rdfs:label "scallion"@en ,
+                   "oignon vert"@fr .
+
+
+#opoponax
+:opoponax a
+                  :Balsamique ;
+        rdfs:label "opoponax"@en ,
+                   "opoponax"@fr .
+
+
+#orange_amere
+:orange_amere a
+                       :Agrume ;
+              rdfs:label "bitter orange"@en ,
+                         "orange amère"@fr .
+
+
+#orchidee
+:orchidee a
+                   :Fleur_Du_Jardin ;
+          rdfs:label "orchid"@en ,
+                     "orchidée"@fr .
+
+
+#orge
+:orge a
+               :Cereale ;
+      rdfs:label "barley"@en ,
+                 "orge"@fr .
+
+
+#orge_torrefiee
+:orge_torrefiee a
+                         :Cereale_Torrefiee ;
+                rdfs:label "orge torréfiée"@fr ,
+                           "roasted barley"@en .
+
+
+#origan
+:origan a
+                 :Plante_Aromatique ;
+        rdfs:label "origan"@fr ,
+                   "origanum"@en .
+
+
+#osmanthe
+:osmanthe a
+                 :Fleur_d_arbuste ;
+       rdfs:label "osmanthus"@en ,
+                  "osmanthe"@fr .
+
+
+#ouzo
+:ouzo a
+               :Anise ;
+      rdfs:label "ouzo"@en ,
+                 "ouzo"@fr .
+
+
+#ozone
+:ozone a
+                :Chimique ;
+       rdfs:label "ozone"@en ,
+                  "ozone"@fr .
+
+
+#paille
+:paille a
+                 :Vegetal_Sec ;
+        rdfs:label "paille"@fr ,
+                   "straw"@en .
+
+
+#pain_de_seigle
+:pain_de_seigle a
+                         :Pain ;
+                rdfs:label "pain de seigle"@fr ,
+                           "rye bread"@en .
+
+
+#pain_grille
+:pain_grille a
+                      :Grille ,
+                      :Pyrazique ;
+             rdfs:label "grilled bread"@en ,
+                        "pain grillé"@fr .
+
+
+#palmarosa
+:palmarosa a
+                    :Fleur_Du_Jardin ;
+           rdfs:label "palmarosa"@en ,
+                      "palmarosa"@fr .
+
+
+#palourde
+:palourde a
+                   :Coquillage ;
+          rdfs:label "clam"@en ,
+                     "palourde"@fr .
+
+#pamplemousse
+:pamplemousse a
+              :Agrume;
+         rdfs:label "grapefruit"@en ,
+                    "pamplemousse"@fr .
+
+
+#papaye
+:papaye a
+                 :Fruit_Exotique ;
+        rdfs:label "papaya"@en ,
+                   "papaye"@fr .
+
+
+#papier
+:papier a
+                 :Mineral ;
+        rdfs:label "paper"@en ,
+                   "papier"@fr .
+
+
+#parmesan
+:parmesan a
+                   :Fromage ;
+          rdfs:label "parmesan"@fr ,
+                     "parmesan cheese"@en .
+
+
+#pasteque
+:pasteque a
+                   :Peponide ;
+          rdfs:label "pastèque"@fr ,
+                     "watermelon"@en .
+
+
+#patchouli
+:patchouli a
+                    :Boise ;
+           rdfs:label "patchouli"@en ,
+                      "patchouli"@fr .
+
+
+#patisserie
+:patisserie a
+                     :Doux ;
+            rdfs:label "pastry"@en ,
+                       "pâtisserie"@fr .
+
+
+#peche
+:peche a
+                :Fruit_a_Noyau ,
+                :Lactone ;
+       rdfs:label "peach"@en ,
+                  "pêche"@fr .
+
+
+#peinture
+:peinture a
+                   :Chimique ,
+                   :Phenole ;
+          rdfs:label "painty"@en ,
+                     "peinture"@fr .
+
+
+#persil
+:persil a
+                 :Plante_Aromatique ;
+        rdfs:label "parsley"@en ,
+                   "persil"@fr .
+
+
+#pesticide
+:pesticide a
+                    :Chimique ;
+           rdfs:label "pesticide"@en ,
+                      "pesticide"@fr .
+
+#petit-grain
+:petit_grain a
+             :Agrume ;
+             :synonyme "petit grain";
+             rdfs:label "petitgrain"@en ,
+                        "petit-grain"@fr .
+
+
+#petits_pois
+:petits_pois a
+                      :Legume_Vert ;
+             rdfs:label "green pea"@en ,
+                        "petits pois"@fr .
+
+
+#petrole
+:petrole a
+                  :Produit_Petrolier ;
+         rdfs:label "oil"@en ,
+                    "pétrole"@fr .
+
+
+#phenol
+:phenol a
+                  :Chimique,
+                  :Phenole ;
+         rdfs:label "phenol"@en ,
+                    "phénol"@fr .
+
+
+#Piment de la jamaïque
+:piment_de_la_jamaique a
+                                  :Poivre;
+                       :synonyme "Jamaica pepper"@en ;
+                       rdfs:label "allspice"@en ,
+                                  "piment de la jamaïque"@fr .
+
+#pimenta
+:pimenta a
+                   :Poivre ;
+         rdfs:label "pimenta"@en ,
+                    "pimenta"@fr .
+
+
+#pistache
+:pistache a
+                   :Fruit_a_Coque ;
+          rdfs:label "pistache"@fr ,
+                     "pistachio"@en .
+
+
+#pivoine
+:pivoine a
+                  :Fleur_d_arbuste ;
+         rdfs:label "peony"@en ,
+                    "pivoine"@fr .
+
+
+#plastique
+:plastique a
+                    :Chimique ;
+           :synonyme "vinyl"@en ;
+           rdfs:label "plastique"@fr ,
+                      "plastic"@en .
+
+
+#poire
+:poire a
+                :Fruit_a_Pepins ;
+       rdfs:label "pear"@en ,
+                  "poire"@fr .
+
+
+#poireau
+:poireau a
+                  :Alliace ;
+         rdfs:label "leek"@en ,
+                    "poireau"@fr .
+
+
+#pois_de_senteur
+:pois_de_senteur a
+                          :Fleur_Du_Jardin ;
+                 rdfs:label "pois de senteur"@fr ,
+                            "sweet pea"@en .
+
+
+#poivre_blanc
+:poivre_blanc a
+                       :Poivre ;
+              rdfs:label "poivre blanc"@fr ,
+                         "white pepper"@en .
+
+
+#poivre_noir
+:poivre_noir a
+                      :Poivre ;
+             rdfs:label "black pepper"@en ,
+                        "poivre noir"@fr .
+
+
+#poivre_vert
+:poivre_vert a
+                      :Poivre ;
+             rdfs:label "green pepper"@en ,
+                        "poivre vert"@fr .
+
+
+#poivron
+:poivron a
+                  :Vert_Pyrazique ;
+         rdfs:label "bell pepper"@en ,
+                    "poivron"@fr .
+
+
+#pomme_cuite
+:pomme_cuite a
+                      :Fruit_Cuit ,
+                      :Pomme ;
+             rdfs:label "cooked apple"@en ,
+                        "pomme cuite"@fr .
+
+
+#pomme_de_terre_cuite
+:pomme_de_terre_cuite a
+                               :Pomme_De_Terre ,
+                               :Legumes_Cuits ,
+                               :Soufre ;
+                      rdfs:label "baked potato"@en ,
+                                 "pomme de terre cuite"@fr .
+
+
+#pomme_rose
+:pomme_rose a
+                     :Pomme ;
+            rdfs:label "apple rose"@en ,
+                       "pomme rose"@fr .
+
+
+#pomme_verte
+:pomme_verte a
+                      :Pomme ;
+             rdfs:label "green apple"@en ,
+                        "pomme verte"@fr .
+
+
+#pop_corn
+:pop_corn a
+                   :Pyrazique ;
+          rdfs:label "pop corn"@fr ,
+                     "popcorn"@en .
+
+
+#porc_cuit
+:porc_cuit a
+                    :Viande_Cuite ;
+           rdfs:label "porc cuit"@fr ,
+                      "pork"@en .
+
+
+#poudre
+:poudre a
+                 :Floral ;
+        rdfs:label "poudré"@fr ,
+                   "powdery"@en .
+
+
+#poulet
+:poulet a
+                 :Poulailler ;
+        rdfs:label "chicken"@en ,
+                   "poulet"@fr .
+
+
+#poulet_roti
+:poulet_roti a
+                      :Grille ,
+                      :Viande_Cuite ;
+             rdfs:label "poulet rôti"@fr ,
+                        "roasted chicken"@en .
+
+
+#poussiere
+:poussiere a
+                    :Moisi ,
+                    :Terreux ;
+           rdfs:label "dusty"@en ,
+                      "poussière"@fr .
+
+
+#praline
+:praline a
+                  :Caramel ,
+                  :Fruit_a_Coque_Torrefie ;
+         rdfs:label "praline"@en ,
+                    "praline"@fr .
+
+
+#prune
+:prune a
+                :Fruit_a_Noyau ;
+       rdfs:label "plum"@en ,
+                  "prune"@fr .
+
+
+#pruneau
+:pruneau a
+                  :Fruit_a_Noyau,
+                  :Fruit_Sec ;
+         rdfs:label "prune"@en ,
+                    "pruneau"@fr .
+
+
+#putride
+:putride a
+                  :Animal ,
+                  :Moisi ;
+         rdfs:label "putrid"@en ,
+                    "putride"@fr .
+
+
+#Racine de valériane
+:racine_de_valeriane a
+                     :Pied ,
+                     :urine_de_chat ;
+        rdfs:label "Racine de valériane"@fr ,
+                   "valerian root"@en .
+
+
+#radis
+:radis a
+                :Crucifere ,
+                :Racine ;
+       rdfs:label "radis"@fr ,
+                  "radish"@en .
+
+
+#raifort
+:raifort a
+                  :Crucifere ,
+                  :Racine ;
+         rdfs:label "horseradish"@en ,
+                    "raifort"@fr .
+
+
+#raisin
+:raisin a
+                 :Fruit_a_Pepins ;
+        rdfs:label "grape"@en ,
+                   "raisin"@fr .
+
+
+#raisin_sec
+:raisin_sec a
+                :Fruit_Sec ;
+       rdfs:label "raisin"@en ,
+                  "raisin sec"@fr .
+
+
+#reglisse
+:reglisse a
+                   :Bois,
+                   :Coumarine,
+                   :Racine ;
+          :synonyme "black licorice"@en ;
+          rdfs:label "licorice"@en ,
+                     "réglisse"@fr .
+
+
+#reseda
+:reseda a
+                 :Fleur_Du_Jardin ;
+        rdfs:label "reseda"@en ,
+                   "réséda"@fr .
+
+
+#rhubarbe
+:rhubarbe a
+                   :Vegetal_Vert ;
+          rdfs:label "rhubarb"@en ,
+                     "rhubarbe"@fr .
+
+
+#ricotta
+:ricotta a
+                           :Lacte ;
+                  rdfs:label "ricotta"@en ,
+                             "ricotta"@fr .
+
+
+#rhum
+:rhum a
+               :Alcool_De_Fut ;
+      rdfs:label "rhum"@fr ,
+                 "rummy"@en .
+
+
+#riz_basmati
+:riz_basmati a
+                      :Pyrazique ;
+             rdfs:label "basmati rice"@en ,
+                        "riz basmati"@fr .
+
+
+#romarin
+:romarin a
+                  :Medicinal ,
+                  :Plante_Aromatique ;
+         rdfs:label "romarin"@fr ,
+                    "rosemary"@en .
+
+
+#roquefort
+:roquefort a
+                      :Fromage_bleu ;
+           rdfs:label "roquefort"@fr ,
+                      "roquefort cheese"@en .
+
+
+#rose
+:rose a
+               :Fleur_d_arbuste ;
+      rdfs:label "rose"@en ,
+                 "rose"@fr .
+
+
+#rue
+:rue a
+               :Fleur_Du_Jardin ;
+     :synonyme "ruta"@en ;
+     rdfs:label "rue"@en ,
+                "rue"@fr .
+#safran
+:safran a
+                 :Epice ;
+        rdfs:label "safran"@fr ,
+                   "saffron"@en .
+
+
+#saindoux
+:saindoux a
+                   :Graisse_Animale ;
+          rdfs:label "lard"@en ,
+                     "saindoux"@fr .
+
+
+#salade_verte
+:salade_verte a
+                       :Legume_Vert ;
+              rdfs:label "lettuce"@en ,
+                         "salade verte"@fr .
+
+
+#salsepareille
+:salsepareille a
+                        :Plante_Aromatique ;
+               rdfs:label "salsepareille"@fr ,
+                          "sarsaparilla"@en .
+
+
+#sang
+:sang a
+               :Metal ;
+      rdfs:label "bloody"@en ,
+                 "sang"@fr .
+
+
+#santal
+:santal a
+                 :Bois ;
+        rdfs:label "sandalwood"@en ,
+                   "santal"@fr .
+
+
+#sapin
+:sapin a
+                :Pin ;
+       rdfs:label "sapin"@fr ,
+                  "spruce"@en .
+
+
+#sauge
+:sauge a
+                :Plante_Aromatique ;
+       :synonyme "sage"@en ;
+       rdfs:label "clary sage"@en ,
+                  "sauge"@fr .
+
+
+#sassafrass
+:sassafrass a
+            :Epice ;
+      rdfs:label "sassafrass"@en ,
+                 "sassafrass"@fr .
+
+
+#saumon
+:saumon a
+                 :Poisson ;
+        rdfs:label "salmon"@en ,
+                   "saumon"@fr .
+
+
+#savon
+:savon a
+                :Aldehyde ;
+       rdfs:label "savon"@fr ,
+                  "soapy"@en .
+
+
+#sciure
+:sciure a
+                 :Boise ;
+        rdfs:label "sawdust"@en ,
+                   "sciure"@fr .
+
+
+#seigle
+:seigle a
+                 :Cereale ;
+        rdfs:label "rye"@en ,
+                   "seigle"@fr .
+
+
+#sesame
+:sesame a
+                 :Oleagineux ;
+        rdfs:label "sesame"@en ,
+                   "sésame"@fr .
+
+
+#seve_de_pin
+:seve_de_pin a
+                      :Pin ;
+             rdfs:label "sappy"@en ,
+                        "sève de pin"@fr .
+
+
+#sirop_d_erable
+:sirop_d_erable a
+                         :Balsamique ;
+                rdfs:label "maple"@en ,
+                           "sirop d'érable"@fr .
+
+
+#souci
+:souci a
+                :Fleur_Du_Jardin ;
+       rdfs:label "marigold"@en ,
+                  "souci"@fr .
+
+
+#soufre
+:soufre a
+                :Soufre ;
+       rdfs:label "sulphur"@en ,
+                  "soufre"@fr .
+
+
+#sous_bois
+:sous_bois a
+                :Foret ;
+       rdfs:label "undergrowth"@en ,
+                  "sous-bois"@fr .
+
+#storax
+:storax a
+                   :Boise ;
+        :synonyme "benjoin"@fr;
+        rdfs:label "storax"@en ,
+                   "storax"@fr .
+
+
+#styrax
+:styrax a
+                 :Fleur_d_arbuste  ;
+        rdfs:label "styrax"@en ,
+                   "styrax"@fr .
+
+
+#sucre_brule
+:sucre_brule a
+                      :Brule ;
+             rdfs:label "burnt sugar"@en ,
+                        "sucre brûlé"@fr .
+
+
+#sueur
+:sueur a
+                :Animal ;
+       rdfs:label "sueur"@fr ,
+                  "sweaty"@en .
+
+
+#suif
+:suif a
+               :Graisse_Animale ;
+      rdfs:label "suif"@fr ,
+                 "tallow"@en .
+
+
+#sureau
+:sureau a
+               :Baie ,
+               :Fruit_Noir ;
+      rdfs:label "sureau"@fr ,
+                 "elderberry"@en .
+
+
+#tabac
+:tabac a
+                :Vegetal_Sec ;
+       rdfs:label "tabac"@fr ,
+                  "tobacco"@en .
+
+
+#tagete
+:tagete a
+                 :Fleur_Du_Jardin ;
+        rdfs:label "tagete"@fr ,
+                   "tagette"@en .
+
+
+#tanaisie
+:tanaisie a
+                   :Camphre ,
+                   :Fleur_Du_Jardin ;
+          rdfs:label "tanaisie"@fr ,
+                     "tansy"@en .
+
+
+#tequila
+:tequila a
+                  :Alcool_Blanc ;
+         rdfs:label "tequila"@en ,
+                    "tequila"@fr .
+
+
+#terebenthine
+:terebenthine a
+                       :Produit_Petrolier ;
+              rdfs:label "turpentine"@en ,
+                         "térébenthine"@fr .
+
+
+#terre
+:terre a
+                      :Terreux ;
+             rdfs:label "earth"@en ,
+                        "terre"@fr .
+
+
+#the
+:the a
+              :Vegetal_Sec ;
+     rdfs:label "tea"@en ,
+                "thé"@fr .
+
+
+#thon
+:thon a
+               :Poisson ;
+      rdfs:label "thon"@fr ,
+                 "tuna"@en .
+
+
+#thym
+:thym a
+               :Medicinal ,
+               :Menthe ,
+               :Plante_Aromatique ;
+      rdfs:label "thym"@fr ,
+                 "thyme"@en .
+
+
+#tilleul
+:tilleul a
+                  :Vegetal_Sec ;
+         rdfs:label "linden"@en ,
+                    "tilleul"@fr .
+
+
+#tomate
+:tomate a
+                 :Legume ;
+        rdfs:label "tomate"@fr ,
+                   "tomato"@en .
+
+
+#trefle
+:trefle a
+                 :Vegetal_Vert ;
+        rdfs:label "clover"@en ,
+                   "trèfle"@fr .
+
+
+#truffe
+:truffe a
+                 :Champignon ,
+                 :Soufre ;
+        rdfs:label "truffe"@fr ,
+                   "truffle"@en .
+
+
+#tubereuse
+:tubereuse a
+                    :Fleur_Du_Jardin ;
+           rdfs:label "tuberose"@en ,
+                      "tubéreuse"@fr .
+
+
+#urine
+:urine a
+                :Amine ;
+       rdfs:label "urine"@en ,
+                  "urine"@fr .
+
+
+#Vanille
+:vanille a :Balsamique ;
+         rdfs:label "Vanilla"@en ,
+         "vanille"@fr .
+
+
+#vert
+:vert a
+               :Frais ,
+               :Vegetal_Vert ;
+      rdfs:label "green"@en ,
+                 "vert"@fr .
+
+
+#verveine
+:verveine a
+                   :Citronne ,
+                   :Plante_Aromatique ;
+          rdfs:label "verbena"@en ,
+                     "verveine"@fr .
+
+:vetiver a
+                    :Vegetal_Vert  ;
+         rdfs:label "vetiver"@en ,
+                    "vetiver"@fr .
+
+
+#vin
+:vin a
+              :Boisson_Fermentee,
+              :Floral;
+     rdfs:label "vin"@fr ,
+                "winey"@en .
+
+
+#vinaigre
+:vinaigre a
+                   :Acetique ;
+          rdfs:label "vinegar"@en ,
+                     "vinaigre"@fr .
+
+
+#violette
+:violette a
+                   :Fleur_Du_Jardin ;
+          rdfs:label "violet"@en ,
+                     "violette"@fr .
+
+
+#vomi
+:vomi a
+               :Fermentaire ,
+               :Rance ;
+      rdfs:label "puke"@en ,
+                 "vomi"@fr .
+
+
+#wasabi
+:wasabi a
+                 :Moutarde ;
+        rdfs:label "wasabi"@en ,
+                   "wasabi"@fr .
+
+
+#whisky
+:whisky a
+                 :Alcool_De_Fut ;
+        rdfs:label "whiskey"@en ,
+                   "whisky"@fr .
+
+
+#yaourt
+:yaourt a
+                 :Fermentaire ,
+                 :Lacte ;
+        rdfs:label "yaourt"@fr ,
+                   "yogurt"@en .
+
+
+#ylang_ylang
+:ylang_ylang a
+                      :Fleur_d_arbre ;
+             rdfs:label "ylang"@en ,
+                        "ylang-ylang"@fr .
+
+
+#yuzu
+:yuzu a
+               :Citronne ;
+      rdfs:label "yuzu"@en ,
+                 "yuzu"@fr .
+
+
+#zeste citron
+:zeste_citron a
+                :Citronne ,
+                :Zeste_agrume ;
+       :synonyme "zeste citron"@fr ,
+                 "lemon rind"@en ;
+       rdfs:label "lemon peel"@en ,
+                  "zesté citron"@fr .
