@@ -11,6 +11,9 @@ from rdkit import RDLogger
 from sklearn.exceptions import UndefinedMetricWarning
 warnings.simplefilter("ignore", category=UndefinedMetricWarning)
 from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
+from iterstrat.ml_stratifiers import MultilabelStratifiedKFold
+from torchvision.ops import sigmoid_focal_loss
+
 from GNN_Model.gcn_model import OdorClassifier
 from Featurizer.from_smiles import from_smiles  # Feature extraction function
 
@@ -50,8 +53,6 @@ def collate_fn(batch):
     # Separate the graphs and labels
     graphs = [item[0] for item in batch]
     labels = [item[1] for item in batch]
-    
-    # Batch the graphs
     batched_graphs = MoleculeDataBatch.from_data_list(graphs)
     
     # Stack the labels
@@ -119,7 +120,10 @@ def evaluate(model, val_loader, device):
 
     return val_accuracy, val_f1
 
+
 def main():
+    USE_FOCAL = False    # Toggle this to use foc
+
     # Load CSV data
     df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/OdorSmiles_Updated.csv', encoding='ISO-8859-1')
 
@@ -132,43 +136,94 @@ def main():
     valid_descriptors = descriptor_counts[descriptor_counts > 10].index
     filtered_labels = labels_df[valid_descriptors].values
 
-    # Filter SMILES accordingly
-    smiles_list = df['SMILES'].values
+    print(f"Original number of odors: {labels_df.shape[1]}")
+    print(f"Remaining after thresholding: {len(valid_descriptors)}")
+    print(f"Odors removed: {labels_df.shape[1] - len(valid_descriptors)}")
 
-    # Train/test split
-    X_train, X_val, y_train, y_val = train_test_split(smiles_list, filtered_labels, test_size=0.1, random_state=42)
+    # Calculate molecules with zero odor labels
+    label_sums = filtered_labels.sum(axis=1)
+    num_no_odor_molecules = np.sum(label_sums == 0)
+    total_molecules = len(filtered_labels)
+    
+    # Cross-validation
+    mskf = MultilabelStratifiedKFold(n_splits = 5, shuffle = True, random_state = 42)
 
-    # Dataset and DataLoader
-    train_dataset = OdorDataset(X_train, y_train)
-    val_dataset = OdorDataset(X_val, y_val)
 
-    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, collate_fn=collate_fn)
-    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False, collate_fn=collate_fn)
+    for fold, (train_idx, val_idx) in enumerate(mskf.split(smiles_list, filtered_labels), 1):
+        print(f"\n{'='*25} Fold {fold} {'='*25}")
 
-    # Initialize model
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    model = OdorClassifier(
-        num_tasks=filtered_labels.shape[1],
-        readout_dim=175, 
-        mlp_dims=[96, 63]
-    )
-    model.to(device)
+        X_train, X_val = smiles_list[train_idx], smiles_list[val_idx]
+        y_train, y_val = filtered_labels[train_idx], filtered_labels[val_idx]
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-    scheduler = CosineAnnealingWarmRestarts(optimizer, T_0=10, T_mult=2)
-    criterion = torch.nn.BCEWithLogitsLoss()
+        # Create datasets for each fold
+        train_dataset = OdorDataset(X_train, y_train)
+        val_dataset = OdorDataset(X_val, y_val)
 
-    # Training loop
-    num_epochs = 50
-    for epoch in range(num_epochs):
-        train_loss, train_accuracy = train(model, train_loader, device, optimizer, criterion)
-        scheduler.step()
-        print(f'Epoch {epoch+1}/{num_epochs}, Train Loss: {train_loss:.4f}, Train Accuracy: {train_accuracy:.4f}')
+        # Create DataLoaders
+        train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, collate_fn=collate_fn)
+        val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False, collate_fn=collate_fn)
 
-        # Validate after every epoch
-        if (epoch + 1) % 10 == 0:
-            val_accuracy, val_f1 = evaluate(model, val_loader, device)
-            print(f'Epoch {epoch+1}/{num_epochs}, Validation Accuracy: {val_accuracy:.4f}, F1 Score: {val_f1:.4f}')
+        # Initialize model
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        
+        model = OdorClassifier(
+            num_tasks=filtered_labels.shape[1],
+            readout_dim=175,
+            mlp_dims=[96, 63]
+        )
+        model.to(device)
+
+        optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+        scheduler = CosineAnnealingWarmRestarts(optimizer, T_0=10, T_mult=2)
+
+        # Loss function setup
+        neg_counts = (filtered_labels == 0).sum(axis=0)
+        pos_counts = (filtered_labels == 1).sum(axis=0)
+        pos_weight = (neg_counts / (pos_counts + 1e-6)).astype(np.float32)
+        pos_weight_tensor = torch.tensor(pos_weight).to(device)
+
+        if USE_FOCAL:
+            criterion = lambda output, target: sigmoid_focal_loss(output, target, alpha=0.5, gamma=1.0, reduction="mean")
+        else:
+            criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight_tensor)
+
+        # # Early Stopping and Checkpoint setup
+        # best_f1 = 0
+        # patience = 15
+        # counter = 0
+        # min_delta = 1e-4   
+        # best_model_path = f"best_model_fold_{fold}.pt"
+
+        # Training loop
+        num_epochs = 100
+        for epoch in range(1, num_epochs + 1):
+            train_loss, train_accuracy = train(model, train_loader, device, optimizer, criterion)
+            scheduler.step()
+
+            # Print every 10 epochs and the first
+            if epoch == 1 or epoch % 10 == 0:
+                val_acc, val_f1 = evaluate(model, val_loader, device)
+                print(
+                    f"Epoch {epoch:02d} | Train Loss: {train_loss:.4f} | Train Acc: {train_accuracy:.4f}\n"
+                    f"|          Val   Acc : {val_acc:.4f} | F1 Score: {val_f1:.4f}"
+                )
+
+        #     # Early Stopping Check
+        #     if val_f1 - best_f1 > min_delta:
+        #         best_f1 = val_f1
+        #         counter = 0
+        #         torch.save(model.state_dict(), best_model_path)
+        #         print(f"Saved best model at Epoch {epoch} with F1: {val_f1:.4f}")
+        #     else:
+        #         counter += 1
+        #         print(f"No improvement for {counter} epoch(s)")
+        #         if counter >= patience:
+        #             print(f"Early stopping triggered after {patience} epochs.")
+        #             break
+        # # === Load Best Model and Final Evaluation ===
+        # model.load_state_dict(torch.load(best_model_path))
+        # final_val_acc, final_val_f1 = evaluate(model, val_loader, device)
+        # print(f"\n Final Evaluation for Fold {fold}: Accuracy = {final_val_acc:.4f}, F1 Score = {final_val_f1:.4f}")
 
 if __name__ == "__main__":
     main()
