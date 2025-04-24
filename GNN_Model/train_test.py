@@ -120,12 +120,11 @@ def evaluate(model, val_loader, device):
 
     return val_accuracy, val_f1
 
-
 def main():
-    USE_FOCAL = False    # Toggle this to use foc
+    USE_FOCAL = True    # Toggle this to use foc
 
     # Load CSV data
-    df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/OdorSmiles_Updated.csv', encoding='ISO-8859-1')
+    df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/Without_Saturation_CAS_SMILEs.csv', encoding='ISO-8859-1')
 
     # Separate out SMILES and CAS
     smiles_list = df['SMILES'].values
@@ -133,7 +132,7 @@ def main():
 
     # Filter labels (odor descriptors) that appear in more than 10 molecules
     descriptor_counts = labels_df.sum(axis=0)
-    valid_descriptors = descriptor_counts[descriptor_counts > 10].index
+    valid_descriptors = descriptor_counts[descriptor_counts > 5].index
     filtered_labels = labels_df[valid_descriptors].values
 
     print(f"Original number of odors: {labels_df.shape[1]}")
@@ -183,16 +182,9 @@ def main():
         pos_weight_tensor = torch.tensor(pos_weight).to(device)
 
         if USE_FOCAL:
-            criterion = lambda output, target: sigmoid_focal_loss(output, target, alpha=0.5, gamma=1.0, reduction="mean")
+            criterion = lambda output, target: sigmoid_focal_loss(output, target, alpha=0.25, gamma=0.75, reduction="mean")
         else:
             criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight_tensor)
-
-        # # Early Stopping and Checkpoint setup
-        # best_f1 = 0
-        # patience = 15
-        # counter = 0
-        # min_delta = 1e-4   
-        # best_model_path = f"best_model_fold_{fold}.pt"
 
         # Training loop
         num_epochs = 100
@@ -207,23 +199,6 @@ def main():
                     f"Epoch {epoch:02d} | Train Loss: {train_loss:.4f} | Train Acc: {train_accuracy:.4f}\n"
                     f"|          Val   Acc : {val_acc:.4f} | F1 Score: {val_f1:.4f}"
                 )
-
-        #     # Early Stopping Check
-        #     if val_f1 - best_f1 > min_delta:
-        #         best_f1 = val_f1
-        #         counter = 0
-        #         torch.save(model.state_dict(), best_model_path)
-        #         print(f"Saved best model at Epoch {epoch} with F1: {val_f1:.4f}")
-        #     else:
-        #         counter += 1
-        #         print(f"No improvement for {counter} epoch(s)")
-        #         if counter >= patience:
-        #             print(f"Early stopping triggered after {patience} epochs.")
-        #             break
-        # # === Load Best Model and Final Evaluation ===
-        # model.load_state_dict(torch.load(best_model_path))
-        # final_val_acc, final_val_f1 = evaluate(model, val_loader, device)
-        # print(f"\n Final Evaluation for Fold {fold}: Accuracy = {final_val_acc:.4f}, F1 Score = {final_val_f1:.4f}")
 
 if __name__ == "__main__":
     main()
