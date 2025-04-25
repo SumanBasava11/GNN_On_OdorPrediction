@@ -9,29 +9,19 @@ from Featurizer.node_features import get_node_features
 from Featurizer.edge_features import get_edge_features
 from Featurizer.mol_features import get_molecular_features
 
-
 def main():
-
-    # Load the CSV file containing SMILES strings
     df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/OdorSmiles_Updated.csv', encoding='ISO-8859-1')
-    output_path = "Featurizer/smiles_features_output.txt"
+    output_path = "Featurizer/smiles_features_norm_output.txt"
 
     with open(output_path, "w") as f:
         for index, row in df.iterrows():
             smiles = row['SMILES']
-            mol = Chem.MolFromSmiles(smiles)
-            if mol is None:
+            # Using from_smiles to get the data with normalized features
+            data = from_smiles(smiles)
+            if data is None:
                 continue
 
             try:
-                x = get_node_features(mol)
-                num_nodes = x.size(0)
-                edge_index, edge_attr = get_edge_features(mol, num_nodes)
-                mol_features = get_molecular_features(mol)
-
-                data = Data(x=x, edge_index=edge_index, edge_attr=edge_attr, smiles=smiles)
-                data.mol_features = mol_features
-
                 f.write(f"\nFeatures for SMILES: {smiles}\n")
                 f.write("-" * 60 + "\n")
                 f.write("Node Feature Matrix:\n")
