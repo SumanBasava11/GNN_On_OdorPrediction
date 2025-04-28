@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -29,3 +30,17 @@ def plot_conf_matrix(cm, title, filename):
     plt.tight_layout()
     plt.savefig(filename)
     plt.close()
+
+import os
+
+def save_label_distribution(labels, valid_descriptors, path="C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/train_utils/label_distribution.txt"):
+    label_counts = labels.sum(axis=0)
+
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+
+    with open(path, 'w') as f:
+        f.write("[INFO] Label Distribution:\n\n")
+        for label, count in zip(valid_descriptors, label_counts):
+            line = f"{label}: {int(count)} samples"
+            print(line)
+            f.write(line + "\n")

@@ -10,7 +10,8 @@ from rdkit import RDLogger
 from sklearn.exceptions import UndefinedMetricWarning
 warnings.simplefilter("ignore", category=UndefinedMetricWarning)
 
-from config import *
+from train_utils.utils import save_label_distribution
+from train_utils.config import *
 from GNN_Model.gcn_model import OdorClassifier
 from train_utils.dataset import OdorDataset, collate_fn
 from train_utils.train_eval import train, evaluate
@@ -23,7 +24,7 @@ def main():
     df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/OdorSmiles_Updated.csv', encoding='ISO-8859-1')
     smiles = df["SMILES"].values
     labels_df = df.drop(columns=["SMILES", "cas_number"])
-    valid_descriptors = labels_df.loc[:, labels_df.sum() > 10].columns
+    valid_descriptors = labels_df.loc[:, labels_df.sum() > 30].columns
     labels = labels_df[valid_descriptors].values
 
     pos_counts = (labels == 1).sum(axis=0)
@@ -33,13 +34,14 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     mskf = MultilabelStratifiedKFold(n_splits=N_SPLITS, shuffle=True, random_state=SEED)
+
     for fold, (train_idx, val_idx) in enumerate(mskf.split(smiles, labels), 1):
         print(f"\nFold {fold}/{N_SPLITS} {'=' * 40}")
         model = OdorClassifier(num_tasks=labels.shape[1], readout_dim=175, mlp_dims=[96, 63]).to(device)
         optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
         if USE_FOCAL:
-            criterion = lambda out, tgt: sigmoid_focal_loss(out, tgt, alpha=0.25, gamma=0.75, reduction="mean")
+            criterion = lambda out, tgt: sigmoid_focal_loss(out, tgt, alpha=0.5, gamma=2, reduction="mean")
         else:
             criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weights.to(device))
 

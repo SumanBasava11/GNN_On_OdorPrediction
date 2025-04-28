@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch_geometric.nn import GraphConv, global_add_pool
+from torch_geometric.nn import GCNConv, global_add_pool
 
 # Readout Layer
 class ReadoutLayer(nn.Module):
@@ -11,6 +11,8 @@ class ReadoutLayer(nn.Module):
 
     def forward(self, x, batch):
         # Global sum pooling
+        # Apply softmax to node features across feature dimension
+        # x = F.softmax(x, dim=1)
         x = self.global_pool(x, batch)
         return x
 
@@ -24,15 +26,16 @@ class MLPClassifier(nn.Module):
         self.fc2 = nn.Linear(hidden_dims[0], hidden_dims[1])
         self.bn2 = nn.BatchNorm1d(hidden_dims[1])
 
-        self.dropout = nn.Dropout(0.47)
-        self.out = nn.Linear(hidden_dims[1], output_dim)
+        self.dropout = nn.Dropout(0.40)
+        self.out = nn.Linear(hidden_dims[1], 163)
 
     def forward(self, x):
         x = F.relu(self.bn1(self.fc1(x)))
         x = self.dropout(x)
         x = F.relu(self.bn2(self.fc2(x)))
         x = self.dropout(x)
-        x = torch.sigmoid(self.out(x))
+        x = self.out(x) 
+        # x = torch.sigmoid(self.out(x)) 
         return x
 
 
@@ -42,15 +45,19 @@ class OdorClassifier(nn.Module):
         super(OdorClassifier, self).__init__()
 
         # Define 4 GCN layers
-        self.gcn1 = GraphConv(23, 55)
-        self.gcn2 = GraphConv(55, 67)
+        self.gcn1 = GCNConv(23, 55)
+        self.gcn2 = GCNConv(55, 67)
+        self.gcn3 = GCNConv(67, 75)
+        self.gcn4 = GCNConv(75, 85)
 
         # 4 readouts, one for each layer
         self.readout1 = ReadoutLayer()
         self.readout2 = ReadoutLayer()
-  
+        self.readout3 = ReadoutLayer()
+        self.readout4 = ReadoutLayer()
+
         # MLP Classifier
-        self.mlp = MLPClassifier(122 + 10, mlp_dims, num_tasks)
+        self.mlp = MLPClassifier(282 + 10, mlp_dims, 163)
 
     def forward(self, data):
         x, edge_index, mol_features, batch = data.x, data.edge_index, data.mol_features, data.batch
@@ -61,8 +68,14 @@ class OdorClassifier(nn.Module):
         x2 = self.gcn2(x1, edge_index)
         r2 = self.readout2(x2, batch)
 
-        x = torch.cat([r1, r2], dim=1)  # Shape: (batch_size, 122)
+        x3 = self.gcn3(x2, edge_index)
+        r3 = self.readout3(x3, batch)
 
+        x4 = self.gcn4(x3, edge_index)
+        r4 = self.readout4(x4, batch)
+
+        x = torch.cat([r1, r2, r3, r4], dim=1)
+        
         # Get the batch size from x
         batch_size = x.size(0)
         

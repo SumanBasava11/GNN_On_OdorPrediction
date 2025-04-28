@@ -11,7 +11,7 @@ from Featurizer.mol_features import get_molecular_features
 
 def main():
     df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/OdorSmiles_Updated.csv', encoding='ISO-8859-1')
-    output_path = "Featurizer/smiles_features_norm_output.txt"
+    output_path = "Featurizer/smiles_features_output.txt"
 
     with open(output_path, "w") as f:
         for index, row in df.iterrows():
