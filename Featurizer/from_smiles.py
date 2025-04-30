@@ -5,38 +5,38 @@ from sklearn.preprocessing import StandardScaler
 from Featurizer.node_features import get_node_features
 from Featurizer.edge_features import get_edge_features
 from Featurizer.mol_features import get_molecular_features
-# from Featurizer.normalization_utils import MolFeatureNormalizer, NodeFeatureNormalizer
+from Featurizer.normalization_utils import MolFeatureNormalizer, NodeFeatureNormalizer
 
-df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/OdorSmiles_Updated.csv', encoding='ISO-8859-1')
+df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/Without_Saturation_CAS_SMILES.csv', encoding='ISO-8859-1')
 
-# # Fit the normalizers
-# mol_feats = []
-# node_feats = []
+# Fit the normalizers
+mol_feats = []
+node_feats = []
 
-# # Initialize normalizers
-# mol_norm = MolFeatureNormalizer()
-# node_norm = NodeFeatureNormalizer(continuous_indices=[0, 1, 2, 3, 4, 5, 8])  # Define indices of features to normalize
+# Initialize normalizers
+mol_norm = MolFeatureNormalizer()
+node_norm = NodeFeatureNormalizer(continuous_indices=[0, 1, 2, 3, 4, 5, 8])  # Define indices of features to normalize
 
-# # Function to fit normalizers on the dataset
-# def fit_normalizers(smiles_list):
-#     mol_feats = []
-#     node_feats = []
+# Function to fit normalizers on the dataset
+def fit_normalizers(smiles_list):
+    mol_feats = []
+    node_feats = []
 
-#     # Collect all molecular and node features from the dataset
-#     for smi in smiles_list:
-#         mol = Chem.MolFromSmiles(smi)
-#         if mol is None:
-#             continue
-#         mol_feats.append(get_molecular_features(mol))
-#         node_feats.append(get_node_features(mol))
+    # Collect all molecular and node features from the dataset
+    for smi in smiles_list:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is None:
+            continue
+        mol_feats.append(get_molecular_features(mol))
+        node_feats.append(get_node_features(mol))
 
-#     # Fit the normalizers
-#     mol_norm.fit(mol_feats)
-#     node_norm.fit(node_feats)
+    # Fit the normalizers
+    mol_norm.fit(mol_feats)
+    node_norm.fit(node_feats)
 
-# # Fit normalizers on the full dataset of SMILES
-# smiles_list = df['SMILES'].values
-# fit_normalizers(smiles_list)
+# Fit normalizers on the full dataset of SMILES
+smiles_list = df['SMILES'].values
+fit_normalizers(smiles_list)
 
 def from_smiles(smiles: str, with_hydrogen: bool = False, kekulize: bool = False):
 
@@ -50,12 +50,12 @@ def from_smiles(smiles: str, with_hydrogen: bool = False, kekulize: bool = False
         Chem.Kekulize(mol)
 
     node_feat = get_node_features(mol)
-    # node_feat = node_norm.transform(node_feat)  # Normalize node features
+    node_feat = node_norm.transform(node_feat)  # Normalize node features
 
     edge_index, edge_attr = get_edge_features(mol, num_nodes=node_feat.size(0))
 
     mol_feat = get_molecular_features(mol)
-    # mol_feat = mol_norm.transform(mol_feat)  # Normalize molecular features
+    mol_feat = mol_norm.transform(mol_feat)  # Normalize molecular features
 
     data = Data(
         x=node_feat, 

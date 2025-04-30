@@ -21,15 +21,15 @@ rd_logger = RDLogger.logger()
 rd_logger.setLevel(RDLogger.ERROR)
 
 def main():
-    df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/OdorSmiles_Updated.csv', encoding='ISO-8859-1')
+    df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/Without_Saturation_CAS_SMILES.csv', encoding='ISO-8859-1')
     smiles = df["SMILES"].values
     labels_df = df.drop(columns=["SMILES", "cas_number"])
-    valid_descriptors = labels_df.loc[:, labels_df.sum() > 30].columns
+    valid_descriptors = labels_df.loc[:, labels_df.sum() > 5].columns
     labels = labels_df[valid_descriptors].values
 
     pos_counts = (labels == 1).sum(axis=0)
     neg_counts = (labels == 0).sum(axis=0)
-    pos_weights = torch.tensor(neg_counts / (pos_counts + 1e-6), dtype=torch.float32)
+    pos_weights = torch.tensor((neg_counts / (pos_counts + 1e-6)) * 0.4, dtype=torch.float32)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -53,6 +53,6 @@ def main():
             if epoch == 1 or epoch % 10 == 0:
                 acc, f1, prec, rec = evaluate(model, val_loader, device, valid_descriptors)
                 print(f"Validation Acc: {acc:.4f} | F1: {f1:.4f} | Precision: {prec:.4f} | Recall: {rec:.4f}")
-
+            
 if __name__ == "__main__":
     main()

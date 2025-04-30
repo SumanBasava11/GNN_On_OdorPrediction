@@ -19,7 +19,7 @@ def train(model, loader, device, optimizer, criterion, epoch):
         optimizer.step()
 
         total_loss += loss.item()
-        preds = (torch.sigmoid(output) > 0.3).cpu().numpy()
+        preds = (torch.sigmoid(output) > 0.2).cpu().numpy()
         all_preds.append(preds)
         all_labels.append(labels.cpu().numpy())
 
@@ -29,12 +29,12 @@ def train(model, loader, device, optimizer, criterion, epoch):
 
 def evaluate(model, loader, device, valid_descriptors):
     model.eval()
-    all_preds, all_labels = [], []
+    all_preds, all_labels, all_probs = [], [], []
 
     with torch.no_grad():
         for data, labels in loader:
             data, labels = data.to(device), labels.to(device)
-            preds = (torch.sigmoid(model(data)) > 0.3).cpu().numpy()
+            preds = (torch.sigmoid(model(data)) > 0.2).cpu().numpy()
             all_preds.append(preds)
             all_labels.append(labels.cpu().numpy())
 
