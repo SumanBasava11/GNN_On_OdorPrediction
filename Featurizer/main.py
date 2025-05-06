@@ -10,8 +10,11 @@ from Featurizer.edge_features import get_edge_features
 from Featurizer.mol_features import get_molecular_features
 
 def main():
-    df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/OdorSmiles_Updated.csv', encoding='ISO-8859-1')
+    df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/Data_Sampling/Balanced_OdorSmiles_Top100.csv', encoding='ISO-8859-1')
     output_path = "Featurizer/smiles_features_output.txt"
+
+    # valid_count = 0
+    # all_features = []  # To collect all node features
 
     with open(output_path, "w") as f:
         for index, row in df.iterrows():
@@ -32,10 +35,24 @@ def main():
 
                 f.write("=" * 80 + "\n")
 
+                # valid_count += 1
+                # all_features.append(data.x)
+
             except Exception as e:
                 print(f"[ERROR] Failed on SMILES {smiles}: {e}")
 
     print(f"Output saved to: {output_path}")
+
+    # all_features_tensor = torch.cat(all_features, dim=0)
+    # if all_features_tensor is not None:  # Shape: [total_atoms, num_features]
+    #     zero_feature_mask = (all_features_tensor == 0).all(dim=0)  # True where column is all zeros
+    #     zero_indices = torch.nonzero(zero_feature_mask).squeeze().tolist()
+    #     if isinstance(zero_indices, int):
+    #         zero_indices = [zero_indices]
+
+    #     print(f"\nFeature indices that are all zero across all atoms in dataset: {zero_indices}")
+    # else:
+    #     print("No node features collected to analyze.")
 
 if __name__ == "__main__":
     main()

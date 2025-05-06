@@ -1,13 +1,13 @@
 x_map = {
-    'atomic_num': list(range(0, 119)),
-    'degree': list(range(0, 11)),
-    'formal_charge': list(range(-5, 7)),
-    'num_hs': list(range(0, 9)),
-    'num_radical_electrons': list(range(0, 5)),
+    'atomic_num': list(range(0, 35)),
+    'degree': list(range(0, 4)),
+    'formal_charge': list(range(-2, 2)),
+    'num_hs': list(range(0, 5)),
+    'num_radical_electrons': list(range(0, 1)),
     'valence': list(range(0, 6)),
     'is_aromatic': {False: 0, True: 1},
     'is_in_ring': {False: 0, True: 1},
-    'smallest_ring': list(range(0, 20)),
+    'smallest_ring': list(range(0, 15)),
     'chirality' : {
         'CHI_UNSPECIFIED': 0,
         'CHI_TETRAHEDRAL_CW': 1,
@@ -30,18 +30,19 @@ x_map = {
         'OTHER': 7
     },
     'bond_types_connected' : [
-        'UNSPECIFIED',
+        # 'UNSPECIFIED',
         'SINGLE',
         'DOUBLE',
         'TRIPLE',
-        'QUADRUPLE',
-        'QUINTUPLE',
-        'HEXTUPLE',
-        'DATIVE',
-        'DATIVEL',
-        'DATIVER',
-        'OTHER',
-        'ZERO'
+        'AROMATIC'
+        # 'QUADRUPLE',
+        # 'QUINTUPLE',
+        # 'HEXTUPLE',
+        # 'DATIVE',
+        # 'DATIVEL',
+        # 'DATIVER',
+        # 'OTHER',
+        # 'ZERO'
     ]
 }
 
@@ -54,11 +55,11 @@ mol_map = {
     'molecular_weight': [0],
     'logp': [0],
     'tpsa': [0],
-    'num_rings': list(range(0, 21)),
-    'num_rotatable_bonds': list(range(0, 11)),
-    'num_H_bond_donors': list(range(0, 5)),
-    'num_H_bond_acceptors': list(range(0, 10)),
-    'heavy_atom_count': list(range(1, 40)),
-    'formal_charge': list(range(0, 5)),
+    'num_rings': list(range(0, 38)),
+    'num_rotatable_bonds': list(range(0, 149)),
+    'num_H_bond_donors': list(range(0, 116)),
+    'num_H_bond_acceptors': list(range(0, 191)),
+    'heavy_atom_count': list(range(0, 419)),
+    'formal_charge': list(range(-2, 2)),
     'complexity': [0],
 }

@@ -10,9 +10,6 @@ class ReadoutLayer(nn.Module):
         self.global_pool = global_add_pool
 
     def forward(self, x, batch):
-        # Global sum pooling
-        # Apply softmax to node features across feature dimension
-        # x = F.softmax(x, dim=1)
         x = self.global_pool(x, batch)
         return x
 
@@ -27,7 +24,7 @@ class MLPClassifier(nn.Module):
         self.bn2 = nn.BatchNorm1d(hidden_dims[1])
 
         self.dropout = nn.Dropout(0.40)
-        self.out = nn.Linear(hidden_dims[1], 277)
+        self.out = nn.Linear(hidden_dims[1], 100)
 
     def forward(self, x):
         x = F.relu(self.bn1(self.fc1(x)))
@@ -45,10 +42,10 @@ class OdorClassifier(nn.Module):
         super(OdorClassifier, self).__init__()
 
         # Define 4 GCN layers
-        self.gcn1 = GCNConv(23, 55)
-        self.gcn2 = GCNConv(55, 67)
-        self.gcn3 = GCNConv(67, 75)
-        self.gcn4 = GCNConv(75, 85)
+        self.gcn1 = GCNConv(15, 20)
+        self.gcn2 = GCNConv(20, 27)
+        self.gcn3 = GCNConv(27, 34)
+        self.gcn4 = GCNConv(34, 40)
 
         # 4 readouts, one for each layer
         self.readout1 = ReadoutLayer()
@@ -57,21 +54,21 @@ class OdorClassifier(nn.Module):
         self.readout4 = ReadoutLayer()
 
         # MLP Classifier
-        self.mlp = MLPClassifier(282 + 10, mlp_dims, 277)
+        self.mlp = MLPClassifier(121 + 10, mlp_dims, 100)
 
     def forward(self, data):
         x, edge_index, mol_features, batch = data.x, data.edge_index, data.mol_features, data.batch
 
-        x1 = self.gcn1(x, edge_index)
+        x1 = self.gcn1(x, edge_index)      #x1 = F.relu(self.gcn1(x, edge_index))
         r1 = self.readout1(x1, batch)
 
-        x2 = self.gcn2(x1, edge_index)
+        x2 = self.gcn2(x1, edge_index)     #x2 = F.relu(self.gcn2(x1, edge_index))
         r2 = self.readout2(x2, batch)
 
-        x3 = self.gcn3(x2, edge_index)
+        x3 = self.gcn3(x2, edge_index)     #x3 = F.relu(self.gcn3(x2, edge_index))  
         r3 = self.readout3(x3, batch)
 
-        x4 = self.gcn4(x3, edge_index)
+        x4 = self.gcn4(x3, edge_index)     #x4 = F.relu(self.gcn4(x3, edge_index)) 
         r4 = self.readout4(x4, batch)
 
         x = torch.cat([r1, r2, r3, r4], dim=1)
@@ -79,8 +76,11 @@ class OdorClassifier(nn.Module):
         # Get the batch size from x
         batch_size = x.size(0)
         
+        # # Apply softmax to encoder output (softmax bottleneck)
+        # x = F.softmax(x, dim=1)
+
         # Concatenate molecular features
         x = torch.cat([x, mol_features], dim=1)
-
+        
         # MLP Classifier
         return self.mlp(x)
