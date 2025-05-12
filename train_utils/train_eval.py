@@ -11,7 +11,7 @@ def train(model, loader, device, optimizer, criterion, epoch):
     for batch in loader:
         data, labels = batch
         data, labels = data.to(device), labels.to(device)
-
+        
         optimizer.zero_grad()
         output = model(data)
         loss = criterion(output, labels)
@@ -23,13 +23,22 @@ def train(model, loader, device, optimizer, criterion, epoch):
         all_preds.append(preds)
         all_labels.append(labels.cpu().numpy())
 
-    acc = accuracy_score(np.concatenate(all_labels).flatten(), np.concatenate(all_preds).flatten())
-    print(f"Epoch {epoch:03d} | Train Loss: {total_loss / len(loader):.4f} | Train Acc: {acc:.4f}")
-    return total_loss / len(loader), acc
+    y_true = np.concatenate(all_labels)
+    y_pred = np.concatenate(all_preds)
 
-def evaluate(model, loader, device, valid_descriptors, output_threshold_file=None):
+    acc = accuracy_score(y_true.flatten(), y_pred.flatten())
+    prec = precision_score(y_true, y_pred, average='macro', zero_division=1)
+    rec = recall_score(y_true, y_pred, average='macro', zero_division=1)
+    f1 = f1_score(y_true, y_pred, average='macro', zero_division=1)
+
+    print(f"Epoch {epoch:03d} | Train Loss: {total_loss / len(loader):.4f} | "
+          f"Train Acc: {acc:.4f} | Precision: {prec:.4f} | Recall: {rec:.4f} | F1: {f1:.4f}")
+    
+    return total_loss / len(loader), acc, prec, rec, f1
+
+def evaluate(model, loader, device, valid_descriptors):   # output_threshold_file=None
     model.eval()
-    all_preds, all_labels, all_probs = [], [], []
+    all_preds, all_labels= [], []
 
     with torch.no_grad():
         for data, labels in loader:
@@ -38,35 +47,19 @@ def evaluate(model, loader, device, valid_descriptors, output_threshold_file=Non
             # To find optimal threshold per label
             logits = model(data) # raw outputs
             preds = torch.sigmoid(logits).cpu().numpy()                                              # preds = (torch.sigmoid(model(data)) > 0.4).cpu().numpy()
-           
+            labels = labels.cpu().numpy()
+
             all_preds.append(preds)
-            all_labels.append(labels.cpu().numpy())
+            all_labels.append(labels)
 
     y_true = np.vstack(all_labels)
     y_probs = np.vstack(all_preds)
+    y_preds = (y_probs> 0.4).astype(int)  
+ 
+    acc = accuracy_score(y_true.flatten(), y_preds.flatten())
+    f1 = f1_score(y_true, y_preds, average='macro', zero_division=1)
+    prec = precision_score(y_true, y_preds, average='macro', zero_division=1)
+    rec = recall_score(y_true, y_preds, average='macro', zero_division=1)
 
-    # Find optimal thresholds for each label based on precision-recall curve
-    optimal_thresholds = []
-    for i in range(y_true.shape[1]):
-        precision, recall, thresholds = precision_recall_curve(y_true[:, i], y_probs[:, i])
-        f1_scores = 2 * (precision * recall) / (precision + recall + 1e-6)  # Avoid division by zero
-        optimal_threshold = thresholds[np.argmax(f1_scores)]  # Choose the threshold with the best F1 score
-        optimal_thresholds.append(optimal_threshold)
-
-    # Save the optimal thresholds per label in a text file
-    with open(output_threshold_file, "w") as f:
-        f.write("Label\tOptimal Threshold\n")
-        for i, threshold in enumerate(optimal_thresholds):
-            label_name = valid_descriptors[i] if i < len(valid_descriptors) else f"Label_{i}"
-            f.write(f"{label_name}\t{threshold:.4f}\n")
-
-    # Apply per-label thresholds to make final predictions
-    final_preds = (y_probs > optimal_thresholds).astype(int)
-
-    acc = accuracy_score(y_true.flatten(), final_preds.flatten())
-    f1 = f1_score(y_true, final_preds, average='macro', zero_division=1)
-    prec = precision_score(y_true, final_preds, average='macro', zero_division=1)
-    rec = recall_score(y_true, final_preds, average='macro', zero_division=1)
-
-    log_confusion_matrices(y_true, final_preds, valid_descriptors)
+    log_confusion_matrices(y_true, y_preds, valid_descriptors)
     return acc, f1, prec, rec
