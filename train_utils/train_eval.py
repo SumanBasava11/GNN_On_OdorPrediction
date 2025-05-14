@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, precision_recall_curve
 from train_utils.utils import log_confusion_matrices
 
-def train(model, loader, device, optimizer, criterion, epoch):
+def train(model, loader, device, optimizer, criterion, epoch, l1_lambda=1e-5, l2_lambda=1e-4):
     model.train()
     total_loss = 0
     all_preds, all_labels = [], []
@@ -15,14 +15,25 @@ def train(model, loader, device, optimizer, criterion, epoch):
         optimizer.zero_grad()
         output = model(data)
         loss = criterion(output, labels)
+
+        # Collect only MLP parameters
+        mlp_params = [param for name, param in model.named_parameters() if "mlp" in name and param.requires_grad]
+
+        l1_norm = sum(p.abs().sum() for p in  mlp_params)
+        l2_norm = sum(p.pow(2).sum() for p in  mlp_params)
+
+        # Add to total loss
+        loss = loss + l1_lambda * l1_norm + l2_lambda * l2_norm
+
         loss.backward()
         optimizer.step()
 
         total_loss += loss.item()
+        
         preds = (torch.sigmoid(output) > 0.4).cpu().numpy()
         all_preds.append(preds)
         all_labels.append(labels.cpu().numpy())
-
+        
     y_true = np.concatenate(all_labels)
     y_pred = np.concatenate(all_preds)
 
@@ -54,7 +65,7 @@ def evaluate(model, loader, device, valid_descriptors):   # output_threshold_fil
 
     y_true = np.vstack(all_labels)
     y_probs = np.vstack(all_preds)
-    y_preds = (y_probs> 0.4).astype(int)  
+    y_preds = (y_probs> 0.3).astype(int)  
  
     acc = accuracy_score(y_true.flatten(), y_preds.flatten())
     f1 = f1_score(y_true, y_preds, average='macro', zero_division=1)

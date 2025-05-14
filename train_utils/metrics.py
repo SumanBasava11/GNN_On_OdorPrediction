@@ -30,6 +30,3 @@ def save_per_label_metrics(model, loader, device, label_names, output_path="trai
         for i, label in enumerate(label_names):
             f.write(f"{label}\t{precisions[i]:.4f}\t{recalls[i]:.4f}\n")
         f.write(f"\nMean Precision: {mean_precision:.4f}\n")
-
-    print(f"[Per-label metrics saved to {output_path}]")
-    print(f"Mean Precision over all labels: {mean_precision:.4f}")

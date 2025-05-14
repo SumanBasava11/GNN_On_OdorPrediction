@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from iterstrat.ml_stratifiers import MultilabelStratifiedKFold
 # from torchvision.ops import sigmoid_focal_loss
 import warnings
+from torchinfo import summary
 from rdkit import RDLogger
 from sklearn.exceptions import UndefinedMetricWarning
 warnings.simplefilter("ignore", category=UndefinedMetricWarning)
@@ -16,7 +17,9 @@ from train_utils.config import *
 from GNN_Model.gcn_model import OdorClassifier
 from train_utils.dataset import OdorDataset, collate_fn
 from train_utils.train_eval import train, evaluate
-from train_utils.BatchSampler import *
+# from train_utils.BatchBalancer import IterativeStratifiedBatchSampler
+from train_utils.Visuals_Batch_Balancing import *
+from sklearn.metrics import roc_auc_score
 
 # Suppress RDKit warnings
 rd_logger = RDLogger.logger()
@@ -47,10 +50,8 @@ def focal_loss(logits, targets, gamma=2.0, reduction='mean', eps=1e-6):
         return loss.sum()
     return loss
 
-from sklearn.metrics import roc_auc_score
-
 def compute_auc_per_label(model, val_loader, device, label_names, output_path="auc-roc/auc_roc.txt"):
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)  # Ensure directory exists
+    os.makedirs(os.path.dirname(output_path), exist_ok=True) 
 
     model.eval()
     all_labels = []
@@ -99,16 +100,45 @@ def main():
 
     for fold, (train_idx, val_idx) in enumerate(mskf.split(smiles, labels), 1):
         print(f"\nFold {fold}/{N_SPLITS} {'=' * 40}")
-        model = OdorClassifier(num_tasks=labels.shape[1], readout_dim=175, mlp_dims=[96, 63]).to(device)
-        optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
+        # Model initialization
+        model = OdorClassifier(num_tasks=labels.shape[1], readout_dim=175, mlp_dims=[96, 63]).to(device)
+        
+        train_loader = DataLoader(OdorDataset(smiles[train_idx], labels[train_idx]), batch_size=BATCH_SIZE, shuffle=True, collate_fn=collate_fn)
+        val_loader = DataLoader(OdorDataset(smiles[val_idx], labels[val_idx]), batch_size=BATCH_SIZE, shuffle=False, collate_fn=collate_fn)
+        
+        print("\nModel Summary:\n")
+        print(model)
+       
+        optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE, weight_decay=1e-4)
+        
+        # Choose loss function
         if USE_FOCAL:
             criterion = lambda out, tgt: sigmoid_focal_loss(out, tgt, alpha=0.5, gamma=2, reduction="mean")
         else:
             criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weights.to(device))
+        
+        # # Train dataset
+        # train_dataset = OdorDataset(smiles[train_idx], labels[train_idx])
+        # # # Use StratifiedBatchSampler instead of default sampler
+        # # train_sampler = IterativeStratifiedBatchSampler(labels[train_idx], batch_size=64)
+        # # Define train loader with stratified sampling
+        # train_loader = DataLoader(
+        #     train_dataset, 
+        #     batch_size=BATCH_SIZE, 
+        #     sampler=train_sampler,
+        #     collate_fn=collate_fn
+        # )
+       
+        save_label_distribution_bar_charts(train_loader, num_classes=labels.shape[1], save_dir="plots", fold_num=0, max_batches=20)
 
-        train_loader = DataLoader(OdorDataset(smiles[train_idx], labels[train_idx]), batch_size=BATCH_SIZE, shuffle=True, collate_fn=collate_fn)
-        val_loader = DataLoader(OdorDataset(smiles[val_idx], labels[val_idx]), batch_size=BATCH_SIZE, shuffle=False, collate_fn=collate_fn)
+        # # Validation dataset and loader
+        # val_loader = DataLoader(
+        #     OdorDataset(smiles[val_idx], labels[val_idx]), 
+        #     batch_size=BATCH_SIZE, 
+        #     shuffle=False,  # No need to shuffle for validation
+        #     collate_fn=collate_fn
+        # )
 
         print(f"Train set size: {len(train_loader.dataset)}")
         print(f"Batch size: {BATCH_SIZE}")
@@ -116,17 +146,28 @@ def main():
 
         print(f"Validation set size: {len(val_loader.dataset)}")
         print(f"Number of batches in val_loader: {len(val_loader)}")
-
+        
+        # Start training loop
         for epoch in range(1, NUM_EPOCHS + 1):
-            train_loss, train_acc, train_prec, train_rec, train_f1 = train(model, train_loader, device, optimizer, criterion, epoch)
-            if epoch == 1 or epoch % 10 == 0:
-                acc, prec, rec, f1 = evaluate(model, val_loader, device, label_names)  #, output_threshold_file="train_utils/optimal_thresholds_fold1.txt"
-                # acc, f1, prec, rec = evaluate(model, val_loader, device, labels)
+            train_loss, train_acc, train_prec, train_rec, train_f1 = train(
+                model, 
+                train_loader, 
+                device, 
+                optimizer, 
+                criterion, 
+                epoch, 
+                l1_lambda=1e-5, 
+                l2_lambda=1e-4
+            )
+            # Validate at every 10 epochs
+            if epoch % 10 or epoch == 1:
+                acc, prec, rec, f1 = evaluate(model, val_loader, device, label_names)
                 print(f"Validation Acc: {acc:.4f} | F1: {f1:.4f} | Precision: {prec:.4f} | Recall: {rec:.4f}")
+                
                 compute_auc_per_label(model, val_loader, device, labels_df.columns.tolist(), output_path=f"auc-roc/auc_roc_fold{fold}_epoch{epoch}.txt")
                 save_per_label_metrics(
                     model=model,
-                    loader=val_loader,
+                    loader=train_loader,
                     device=device,
                     label_names=label_names,
                     output_path=f"metrics/per_label_metrics_fold{fold}_epoch{epoch}.txt"
