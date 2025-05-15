@@ -24,7 +24,7 @@ class MLPClassifier(nn.Module):
         self.bn2 = nn.BatchNorm1d(hidden_dims[1])
 
         self.dropout = nn.Dropout(0.30)
-        self.out = nn.Linear(hidden_dims[1], 100)
+        self.out = nn.Linear(hidden_dims[1], 30)
 
     def forward(self, x):
         x = F.relu(self.bn1(self.fc1(x)))
@@ -55,7 +55,7 @@ class OdorClassifier(nn.Module):
         # self.readout4 = ReadoutLayer()
 
         # MLP Classifier
-        self.mlp = MLPClassifier(47 + 10, mlp_dims, 100)
+        self.mlp = MLPClassifier(47 + 10, mlp_dims, 30)
 
     def forward(self, data):
         x, edge_index, mol_features, batch = data.x, data.edge_index, data.mol_features, data.batch

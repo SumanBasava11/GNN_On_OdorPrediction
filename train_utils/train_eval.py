@@ -16,18 +16,18 @@ def train(model, loader, device, optimizer, criterion, epoch, l1_lambda=1e-5, l2
         output = model(data)
         loss = criterion(output, labels)
 
-        # Collect only MLP parameters
-        mlp_params = [param for name, param in model.named_parameters() if "mlp" in name and param.requires_grad]
+        # Apply L1/L2 regularization only to MLP parameters
+        # mlp_params = [param for name, param in model.named_parameters() if "mlp" in name and param.requires_grad]
+        
+        reg_params = [param for name, param in model.named_parameters() 
+              if ("mlp" in name or "gcn" in name) and param.requires_grad]
 
-        l1_norm = sum(p.abs().sum() for p in  mlp_params)
-        l2_norm = sum(p.pow(2).sum() for p in  mlp_params)
-
-        # Add to total loss
+        l1_norm = sum(p.abs().sum() for p in  reg_params)
+        l2_norm = sum(p.pow(2).sum() for p in  reg_params)
         loss = loss + l1_lambda * l1_norm + l2_lambda * l2_norm
 
         loss.backward()
         optimizer.step()
-
         total_loss += loss.item()
         
         preds = (torch.sigmoid(output) > 0.4).cpu().numpy()
