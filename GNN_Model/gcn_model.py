@@ -2,18 +2,22 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch_geometric.nn import GCNConv, global_add_pool
+from torch_geometric.transforms import ToDense
+data = ToDense(num_nodes=MAX_NODES)(data)
 
-# Readout Layer
+# Readout Layer: Includes projection to fixed output dimension (175)
 class ReadoutLayer(nn.Module):
-    def __init__(self, in_channels=55, out_channels=175):
+    def __init__(self, in_channels, out_channels):
         super(ReadoutLayer, self).__init__()
         self.global_pool = global_add_pool
+        self.projection = nn.Linear(in_channels, out_channels)
 
     def forward(self, x, batch):
-        x = self.global_pool(x, batch)
+        x = self.global_pool(x, batch)              # [batch_size, in_channels]
+        x = self.projection(x)                      # [batch_size, out_channels]
         return x
 
-# Fully-Connected Neural Network (MLP) Classifier
+# 2-layer MLP Classifier with dropout at each layer
 class MLPClassifier(nn.Module):
     def __init__(self, input_dim, hidden_dims, output_dim):
         super(MLPClassifier, self).__init__()
@@ -24,64 +28,64 @@ class MLPClassifier(nn.Module):
         self.bn2 = nn.BatchNorm1d(hidden_dims[1])
 
         self.dropout = nn.Dropout(0.30)
-        self.out = nn.Linear(hidden_dims[1], 30)
+        self.out = nn.Linear(hidden_dims[1], output_dim)
 
     def forward(self, x):
         x = F.relu(self.bn1(self.fc1(x)))
         x = self.dropout(x)
         x = F.relu(self.bn2(self.fc2(x)))
         x = self.dropout(x)
-        x = self.out(x)
-        # try applying dropour in the final layer
-        # x = torch.sigmoid(self.out(x)) 
-        return x
+        return self.out(x)
 
-
-# Full Model (GCN + Readout + MLP)
+# Full Model: GCN + Readouts (projected to 175 dim) + Summation + MLP
 class OdorClassifier(nn.Module):
-    def __init__(self, num_tasks, readout_dim=175, mlp_dims=[96, 63]):
+    def __init__(self, num_tasks, mlp_dims=[96, 63]):
         super(OdorClassifier, self).__init__()
+        self.num_tasks = num_tasks
 
-        # Define 4 GCN layers
+        # GCN layers
         self.gcn1 = GCNConv(15, 20)
+        self.bn_gcn1 = nn.BatchNorm1d(20)
+
         self.gcn2 = GCNConv(20, 27)
-        # self.gcn3 = GCNConv(27, 34)
-        # self.gcn4 = GCNConv(34, 40)
+        self.bn_gcn2 = nn.BatchNorm1d(27)
 
-        # 4 readouts, one for each layer
-        self.readout1 = ReadoutLayer()
-        self.readout2 = ReadoutLayer()
-        # self.readout3 = ReadoutLayer()
-        # self.readout4 = ReadoutLayer()
+        # Readout layers with projection to 175 dimensions
+        self.readout1 = ReadoutLayer(in_channels=20, out_channels=175)
+        self.readout2 = ReadoutLayer(in_channels=27, out_channels=175)
 
-        # MLP Classifier
-        self.mlp = MLPClassifier(47 + 10, mlp_dims, 30)
+        # Final MLP: Input = 175 (readout sum) + 10 (molecular features)
+        self.mlp = MLPClassifier(input_dim=175 + 10, hidden_dims=mlp_dims, output_dim=num_tasks)
 
-    def forward(self, data):
+        # Storage for external projection access
+        self.saved_projections = {}
+
+    def forward(self, data, return_projections=False):
         x, edge_index, mol_features, batch = data.x, data.edge_index, data.mol_features, data.batch
 
-        x1 = self.gcn1(x, edge_index)      #x1 = F.relu(self.gcn1(x, edge_index))
+        # GCN layer 1 and readout
+        x1 = self.gcn1(x, edge_index)
+        x1 = F.relu(self.bn_gcn1(x1))
         r1 = self.readout1(x1, batch)
 
-        x2 = self.gcn2(x1, edge_index)     #x2 = F.relu(self.gcn2(x1, edge_index))
+        # GCN layer 2 and readout
+        x2 = self.gcn2(x1, edge_index)
+        x2 = F.relu(self.bn_gcn2(x2))
         r2 = self.readout2(x2, batch)
 
-        # x3 = self.gcn3(x2, edge_index)     #x3 = F.relu(self.gcn3(x2, edge_index))  
-        # r3 = self.readout3(x3, batch)
+        # Sum readouts from both layers
+        r_sum = r1 + r2  # [batch_size, 175]
 
-        # x4 = self.gcn4(x3, edge_index)     #x4 = F.relu(self.gcn4(x3, edge_index)) 
-        # r4 = self.readout4(x4, batch)
+        # Optionally store projections
+        self.saved_projections['readout1'] = r1.detach().cpu()
+        self.saved_projections['readout2'] = r2.detach().cpu()
 
-        x = torch.cat([r1, r2], dim=1)
+        # Combine with molecular features
+        combined = torch.cat([r_sum, mol_features], dim=1)  # [batch_size, 185]
 
-        # Get the batch size from x
-        batch_size = x.size(0)
-        
-        # # Apply softmax to encoder output (softmax bottleneck)
-        # x = F.softmax(x, dim=1)
+        # Final classification
+        output = self.mlp(combined)
 
-        # Concatenate molecular features
-        x = torch.cat([x, mol_features], dim=1)
-        
-        # MLP Classifier
-        return self.mlp(x)
+        if return_projections:
+            return output, self.saved_projections
+        return output

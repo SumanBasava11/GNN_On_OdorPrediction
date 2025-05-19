@@ -3,6 +3,7 @@ import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import FunctionalGroups
 from collections import Counter
+from rdkit.Chem import Draw
 
 # Load SMILES dataset
 df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/OdorSmiles_Updated.csv', encoding='ISO-8859-1')
@@ -50,3 +51,5 @@ print(f"Molecules with no functional group: {no_fg_count}")
 print("\nFunctional Group Counts:")
 for fg, count in fg_counter.items():
     print(f"{fg}: {count}")
+
+

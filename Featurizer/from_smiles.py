@@ -7,7 +7,7 @@ from Featurizer.edge_features import get_edge_features
 from Featurizer.mol_features import get_molecular_features
 # from Featurizer.normalization_utils import MolFeatureNormalizer, NodeFeatureNormalizer
 
-df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/Data_Sampling/Balanced_OdorSmiles_Top30.csv', encoding='ISO-8859-1')
+df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/Data_Sampling/Balanced_OdorSmiles_Top100.csv', encoding='ISO-8859-1')
 
 # # Fit the normalizers
 # mol_feats = []
