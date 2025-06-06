@@ -33,7 +33,9 @@ C/C=C/CCCCCCCC=O	Aldehyde
 C/C=C/CCCO	Alcohol
 C/C=C/CCCO	Alcohol
 C[C@@]1(CC[C@H]2C[C@@H]1C2(C)C)O	Alcohol
+C[C@@]12CCC[C@@]([C@H]1CC[C@]34[C@H]2CC[C@](C3)(C(=C)C4)O[C@H]5[C@@H]([C@H]([C@@H]([C@H](O5)CO)O)O[C@H]6[C@@H]([C@H]([C@@H]([C@H](O6)CO)O)O)O)O[C@H]7[C@@H]([C@H]([C@@H]([C@H](O7)CO)O)O)O)(C)C(=O)O[C@H]8[C@@H]([C@H]([C@@H]([C@H](O8)CO)O)O)O	Alcohol
 C[C@@]12CCC[C@@](C1)([C@H]3CC([C@@H]3CC2)(C)C)O	Alcohol
+C[C@@]12CCC[C@](C)([C@H]1CC[C@]34CC(=C)[C@](CC[C@@H]23)(C4)O[C@@H]5O[C@H](CO)[C@@H](O)[C@H](O)[C@H]5O[C@@H]6O[C@H](CO)[C@@H](O)[C@H](O)[C@H]6O)C(=O)O[C@@H]7O[C@H](CO)[C@@H](O)[C@H](O)[C@H]7O	Alcohol
 C[C@@H]([NH+](C)C)c1ccccc1	Amine
 C[C@@H](CC/C=C(\C)/CCC=C(C)C)CC=O	Aldehyde
 C[C@@H](CC=C)C([O-])=O	CarboxylicAcid
@@ -57,6 +59,7 @@ C[C@]1(CC[C@H]2[C@H]1[C@@H]3[C@@H](C3(C)C)CCC2=C)O	Alcohol
 C[C@]1(O)CC[C@@H]2[C@@H]1[C@H]3[C@@H](CCC2=C)C3(C)C	Alcohol
 C[C@]12CC[C@H]3[C@@H](CC[C@H]4C[C@H](O)CC[C@]34C)[C@@H]1CC=C2	Alcohol
 C[C@H](C(=O)NC1C(SC1(C)C)(C)C)NC(=O)[C@H](CC(=O)O)N	CarboxylicAcid, Amine
+C[C@H](C(=O)NC1C(SC1(C)C)(C)C)NC(=O)[C@H](CC(=O)O)N.C[C@H](C(=O)NC1C(SC1(C)C)(C)C)NC(=O)[C@H](CC(=O)O)N.O.O.O.O.O	CarboxylicAcid, Amine
 C[C@H](C(=O)OCCC(C)CCC=C(C)C)O	Alcohol
 C[C@H](CC1=CC=C(C=C1)C(C)(C)C)C=O	Aldehyde
 C[C@H](CCC=C(C)C)CC=O	Aldehyde
@@ -74,6 +77,7 @@ C[C@H]1CCC=C(C)C12CC[C@H](C2)C(C)(C)O	Alcohol
 C[C@H]1CCC2(O)C(C)(C)C3CC[C@@]2(C)C1C3	Alcohol
 C[C@H]1N2CCC[C@H]2S[C@H](S1)C	Amine
 C[C@H]1O[C@@H](C)C(=[NH+]1)C	Amine
+C[C@H]1O[C@H](O[C@H]2[C@@H](O[C@H](CO)[C@@H](O)[C@@H]2O[C@@H]3O[C@H](CO)[C@@H](O)[C@H](O)[C@H]3O)O[C@]45CCC6[C@]7(C)CCC[C@](C)(C7CC[C@@]6(CC4=C)C5)C(=O)OC8O[C@H](CO)[C@@H](O)[C@H](O)[C@H]8O)[C@@H](O)[C@@H](O)[C@@H]1O	Alcohol
 C[C](C)=[C]1CC[C](C)(O)CC1	Alcohol
 C[S+](C)CC[C@@H](C(=O)O)N.[Cl-]	CarboxylicAcid, Amine
 C\C(C=C)=C/CCC(C)(C)O	Alcohol
@@ -581,6 +585,8 @@ CC1CCC(C(C1)OCC2COC(O2)C3=CC(=C(C=C3)O)OC)C(C)C	Alcohol
 Cc1ccc(c(O)c1)C(C)(C)C	Alcohol
 CC1CCC(C(O)C1)C(C)(C)O	Alcohol
 CC1CCC(C(O)C1)C(C)(C)O	Alcohol
+CC1CCC(C(O)C1)C(C)(C)O	Alcohol
+CC1CCC(C(O)C1)C(C)(C)O	Alcohol
 CC1CCC(C(O)C1)C(C)=C	Alcohol
 CC1CCC(C(O)C1)C(C)=C	Alcohol
 Cc1ccc(C)c(O)c1	Alcohol
@@ -1038,6 +1044,7 @@ CCSCCCO	Alcohol
 CCSCCO	Alcohol
 CN(C)C	Amine
 CN=C=S	Amine
+CN1C=NC2C1C(=O)N(C(=O)N2C)C.C[N+]1=CC=CC(=C1)C(=O)[O-].C1=COC=C1.C1=CC(=CN=C1)C(=O)O	CarboxylicAcid, Amine
 CNc1ccccc1C(=O)OC	Amine
 CNc1ccccc1C(=O)OCC(C)C	Amine
 COC(=O)C(Cc1ccccc1)NC(=O)C(N)CC(O)=O	CarboxylicAcid, Amine
@@ -1106,6 +1113,7 @@ COc1ccc(CC=O)cc1	Aldehyde
 COc1ccc(cc1)/C=C(/C)C=O	Aldehyde
 COc1ccc(cc1)C(=O)OCC(O)=O	CarboxylicAcid
 COc1ccc(cc1)C(O)=O	CarboxylicAcid
+COc1ccc(CCC(=O)c2c(O)cc(O[C@@H]3O[C@H](CO)[C@@H](O)[C@H](O)[C@H]3O[C@@H]4O[C@@H](C)[C@H](O)[C@@H](O)[C@H]4O)cc2O)cc1O	Alcohol
 COc1ccc(CO)cc1	Alcohol
 COc1cccc(OC)c1O	Alcohol
 COc1ccccc1/C=C/C=O	Aldehyde
@@ -1193,6 +1201,7 @@ OC[C@@H](O)[C@@H](O)[C@H](O)C(=O)CO	Alcohol
 OC[C@H]1NCC[C@@H](O)[C@@H]1O	Amine, Alcohol
 OC[C@H]1O[C@H](O[C@]2(CCl)O[C@H](CCl)[C@@H](O)[C@@H]2O)[C@H](O)[C@@H](O)[C@H]1Cl	Alcohol, Halogen
 OC[C@H]1O[C@H](O[C@]2(CO)O[C@H](CO)[C@@H](O)[C@@H]2O)[C@H](O)[C@@H](O)[C@@H]1O	Alcohol
+OC[C@H]1O[C@H](O[C@]2(CO[C@]3(CO[C@]4(CO[C@]5(CO[C@]6(CO[C@]7(CO[C@]8(CO[C@]9(CO[C@]%10(CO[C@]%11(CO[C@]%12(CO[C@]%13(CO[C@]%14(CO[C@]%15(CO[C@]%16(CO[C@]%17(CO[C@]%18(CO[C@]%19(CO[C@]%20(CO[C@]%21(CO[C@]%22(CO[C@]%23(CO[C@]%24(CO[C@]%25(CO[C@]%26(CO[C@]%27(CO[C@]%28(CO[C@]%29(CO[C@]%30(CO[C@]%31(CO[C@]%32(CO[C@]%33(CO[C@]%34(CO[C@]%35(CO[C@]%36(CO[C@]%37(CO[C@]%38(CO)O[C@H](CO)[C@@H](O)[C@@H]%38O)O[C@H](CO)[C@@H](O)[C@@H]%37O)O[C@H](CO)[C@@H](O)[C@@H]%36O)O[C@H](CO)[C@@H](O)[C@@H]%35O)O[C@H](CO)[C@@H](O)[C@@H]%34O)O[C@H](CO)[C@@H](O)[C@@H]%33O)O[C@H](CO)[C@@H](O)[C@@H]%32O)O[C@H](CO)[C@@H](O)[C@@H]%31O)O[C@H](CO)[C@@H](O)[C@@H]%30O)O[C@H](CO)[C@@H](O)[C@@H]%29O)O[C@H](CO)[C@@H](O)[C@@H]%28O)O[C@H](CO)[C@@H](O)[C@@H]%27O)O[C@H](CO)[C@@H](O)[C@@H]%26O)O[C@H](CO)[C@@H](O)[C@@H]%25O)O[C@H](CO)[C@@H](O)[C@@H]%24O)O[C@H](CO)[C@@H](O)[C@@H]%23O)O[C@H](CO)[C@@H](O)[C@@H]%22O)O[C@H](CO)[C@@H](O)[C@@H]%21O)O[C@H](CO)[C@@H](O)[C@@H]%20O)O[C@H](CO)[C@@H](O)[C@@H]%19O)O[C@H](CO)[C@@H](O)[C@@H]%18O)O[C@H](CO)[C@@H](O)[C@@H]%17O)O[C@H](CO)[C@@H](O)[C@@H]%16O)O[C@H](CO)[C@@H](O)[C@@H]%15O)O[C@H](CO)[C@@H](O)[C@@H]%14O)O[C@H](CO)[C@@H](O)[C@@H]%13O)O[C@H](CO)[C@@H](O)[C@@H]%12O)O[C@H](CO)[C@@H](O)[C@@H]%11O)O[C@H](CO)[C@@H](O)[C@@H]%10O)O[C@H](CO)[C@@H](O)[C@@H]9O)O[C@H](CO)[C@@H](O)[C@@H]8O)O[C@H](CO)[C@@H](O)[C@@H]7O)O[C@H](CO)[C@@H](O)[C@@H]6O)O[C@H](CO)[C@@H](O)[C@@H]5O)O[C@H](CO)[C@@H](O)[C@@H]4O)O[C@H](CO)[C@@H](O)[C@@H]3O)O[C@H](CO)[C@@H](O)[C@@H]2O)[C@H](O)[C@@H](O)[C@@H]1O	Alcohol
 OC[C@H]1O[C@H](OC[C@H]2OC(O)(CO)[C@@H](O)[C@@H]2O)[C@H](O)[C@@H](O)[C@@H]1O	Alcohol
 OC\C=C/c1ccccc1	Alcohol
 OC=O	CarboxylicAcid
@@ -1239,6 +1248,7 @@ OCC1CCCO1	Alcohol
 OCc1ccncc1	Alcohol
 OCc1oc(C=O)cc1	Alcohol, Aldehyde
 OCC1OC(OC2C(O)C(O)C(O)OC2CO)C(O)C(O)C1O	Alcohol
+OCC1OC2OC3C(O)C(O)C(OC3CO)OC4C(O)C(O)C(OC4CO)OC5C(O)C(O)C(OC5CO)OC6C(O)C(O)C(OC6CO)OC7C(O)C(O)C(OC7CO)OC8C(O)C(O)C(OC8CO)OC1C(O)C2O	Alcohol
 OCc1occc1	Alcohol
 OCc1sccc1	Alcohol
 OCCC(=O)OCCc1ccccc1	Alcohol

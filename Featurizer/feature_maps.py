@@ -1,3 +1,4 @@
+# Node features
 x_map = {
     'atomic_num': list(range(0, 35)),
     'degree': list(range(0, 4)),
@@ -30,27 +31,20 @@ x_map = {
         'OTHER': 7
     },
     'bond_types_connected' : [
-        # 'UNSPECIFIED',
         'SINGLE',
         'DOUBLE',
         'TRIPLE',
         'AROMATIC'
-        # 'QUADRUPLE',
-        # 'QUINTUPLE',
-        # 'HEXTUPLE',
-        # 'DATIVE',
-        # 'DATIVEL',
-        # 'DATIVER',
-        # 'OTHER',
-        # 'ZERO'
     ]
 }
 
+# Edge features
 e_map = {
     'stereo' : ['STEREONONE', 'STEREOANY', 'STEREOZ', 'STEREOE', 'STEREOCIS', 'STEREOTRANS'],
     'is_conjugated': [False, True],
 }
 
+# Molecular features
 mol_map = {
     'molecular_weight': [0],
     'logp': [0],

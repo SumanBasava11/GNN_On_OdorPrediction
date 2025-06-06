@@ -2,7 +2,7 @@ from rdkit import Chem
 from rdkit.Chem import Descriptors
 import pandas as pd
 
-df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/OdorSmiles_Updated.csv', encoding='ISO-8859-1')
+df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/(Saturated)SoS_Full.csv', encoding='ISO-8859-1')
 
 cas_col = 'cas_number'
 smiles_col = 'SMILES'

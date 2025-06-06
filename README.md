@@ -1,29 +1,34 @@
-# GNN_On_OdorPrediction
+# Molecular Odor Prediction with Graph Neural Networks
 
 ## Overview
-Olfactometry is the study of odor properties of a product (such as food) based on its molecular composition. Each product is decomposed into a set of odorant molecules, whose odors are identified by a human judge. This project aims to discover and explain the discriminating molecular features that correspond to specific odors using **Graph Neural Networks (GNNs)**.
 
-By representing each molecule as a labeled graph with odor descriptors, I apply **GNN-based learning methods** to extract frequent sub-graphs characteristic of each odor. These sub-graphs correspond to the odorant parts of molecules, following a key/lock model.
+Quantitative Structure-Odor Relationship (QSOR) modeling seeks to predict how a molecule smells based on its structure. With advancements in deep learning and graph neural networks (GNNs) that can learn directly from molecular graphs [1–4], this long-standing interdisciplinary challenge—spanning chemistry, neuroscience, and machine learning—is gaining renewed attention [5].
 
-## Methodology
-1. **Dataset Preparation:**
-   - Collect and preprocess odorant molecule datasets.
-   - Label molecules with corresponding odor descriptors.
-2. **Model Selection & Training:**
-   - Implement GCN, GAT, GAE, and GCL models.
-   - Train models using odor-labeled graphs.
-3. **Feature Extraction & Explanation:**
-   - Extract discriminative molecular substructures.
-   - Apply contrastive learning and chemical function augmentation.
-4. **Evaluation & Comparison:**
-   - Compare against baseline methods.
-   - Validate results with existing molecular odor databases.
+Human odor perception is driven by interactions between odorant molecules and hundreds of olfactory receptors in the nose [6, 7]. By leveraging machine learning to model this process, we can design novel synthetic fragrances, reduce dependency on natural raw materials, and improve our understanding of how the brain processes smells.
+
+This project builds upon recent work to improve predictive modeling for molecular odor using GNNs.
+
+## Objectives
+
+- **Improve Baseline Results**  
+  Reproduce and enhance results from the paper *Machine Learning for Scent* [8].
+
+- **Incorporate Functional Group Features**  
+  Extend molecular feature representations by adding functional group information.
+
+- **Add Odor Hierarchy**  
+  Enrich odor space using hierarchical relationships between odor descriptors  
+  _e.g., `meaty → chicken → roast chicken`_.
+
+- **Include Explainability**  
+  Introduce subgraph-based explanation methods to highlight molecular regions influencing to specific odors.
+
+---
 
 ## Installation
 ### Prerequisites
 - Python 3.8+
 - PyTorch
-- DGL (Deep Graph Library)
 - RDKit (for molecular structure handling)
 - Scikit-learn
 - NumPy, Pandas, Matplotlib
@@ -31,12 +36,12 @@ By representing each molecule as a labeled graph with odor descriptors, I apply 
 ### Setup
 ```sh
 # Clone the repository
-git clone https://github.com/SumanBasava11/GNN_on_Odor.git
-cd GNN_on_Odor
+git clone https://github.com/SumanBasava11/GNN_On_OdorPrediction.git
+cd GNN_On_OdorPrediction
 
 # Create a virtual environment
-python -m venv env
-source env/bin/activate  # On Windows use: env\Scripts\activate
+python -m venv myenv
+source myenv/bin/activate  # On Windows use: myenv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
@@ -44,23 +49,19 @@ pip install -r requirements.txt
 
 ## Usage
 ```sh
-# Train the model
-python train.py --config config.yaml
-
-# Evaluate the model
-python evaluate.py --checkpoint model.pth
-```
+# Train and Evaluate the model
+python main2.py
 
 ## References
-1. Jaubert, J.-N., Tapiero, C., & Dore, J.-C. (1995). The Field of Odors: Toward a Universal Language for Odor Relationships. *Perfumer & Flavorist, 20*, 1-16.
-2. Sanchez-Lengeling, B., Wei, J. N., Lee, B. K., Gerkin, R. C., Aspuru-Guzik, A., & Wiltschko, A. B. (2019). Machine learning for scent: Learning generalizable perceptual representations of small molecules. *arXiv preprint arXiv:1910.10685*.
-3. Wiltschko, A. B. (2019). Learning to Smell: Using Deep Learning to Predict the Olfactory Properties of Molecules. *Google Research Blog*.
-4. Sisson, L. (2023). Olfactory Label Prediction on aroma-chemical Pairs. *arXiv preprint arXiv:2312.16124*. [https://arxiv.org/html/2312.16124v2](https://arxiv.org/html/2312.16124v2)
-5. Ren, Y., Liu, B., Huang, C., Dai, P., Bo, L., & Zhang, J. (2019). Heterogeneous deep graph infomax. *arXiv preprint arXiv:1911.08538*. [https://arxiv.org/pdf/1911.08538](https://arxiv.org/pdf/1911.08538)
-6. Ying, R., Wang, A., You, J., & Leskovec, J. (2020). Frequent subgraph mining by walking in order embedding space. *Proc. Int. Conf. Mach. Learn. Workshops*. [http://snap.stanford.edu/frequent-subgraph-mining/](http://snap.stanford.edu/frequent-subgraph-mining/)
-7. Huang, Q., Yamada, M., Tian, Y., Singh, D., & Chang, Y. (2022). Graphlime: Local interpretable model explanations for graph neural networks. *IEEE Transactions on Knowledge and Data Engineering*.
-8. Yuan, H., Yu, H., Gui, S., & Ji, S. (2022). Explainability in graph neural networks: A taxonomic survey. *IEEE Transactions on Pattern Analysis and Machine Intelligence, 45*(5), 5782-5799.
-9. Barsainyan, A. A. et al. (2023). openPOM. [https://github.com/BioMachineLearning/openpom](https://github.com/BioMachineLearning/openpom)
+
+1. Gilmer et al. (2017). *Neural Message Passing for Quantum Chemistry*.  
+2. Wu et al. (2018). *MoleculeNet: A Benchmark for Molecular Machine Learning*.  
+3. Duvenaud et al. (2015). *Convolutional Networks on Graphs for Learning Molecular Fingerprints*.  
+4. Kipf & Welling (2016). *Semi-Supervised Classification with Graph Convolutional Networks*.  
+5. Amoore & Pfaffmann (1969). *A Plan to Identify Odor Qualities of Molecules*.  
+6. Buck & Axel (1991). *A Novel Multigene Family May Encode Odorant Receptors*.  
+7. Mainland et al. (2014). *The Missense of Smell: Functional Variability in the Human Odorant Receptor Repertoire*.  
+8. Sánchez-Lengeling et al. (2023). *Machine Learning for Scent: Learning Generalizable Perceptual Representations of Small Molecules*.
 
 ## License
 This project is licensed under the MIT License.
