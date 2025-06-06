@@ -25,14 +25,6 @@ This project builds upon recent work to improve predictive modeling for molecula
 
 ---
 
-## Installation
-### Prerequisites
-- Python 3.8+
-- PyTorch
-- RDKit (for molecular structure handling)
-- Scikit-learn
-- NumPy, Pandas, Matplotlib
-
 ### Setup
 ```sh
 # Clone the repository
