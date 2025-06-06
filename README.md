@@ -51,7 +51,7 @@ pip install -r requirements.txt
 ```sh
 # Train and Evaluate the model
 python main2.py
-
+```
 ## References
 
 1. Gilmer et al. (2017). *Neural Message Passing for Quantum Chemistry*.  
