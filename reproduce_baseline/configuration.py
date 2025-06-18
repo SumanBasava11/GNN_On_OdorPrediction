@@ -33,7 +33,27 @@ def focal_loss(logits, targets, gamma=1.5, alpha=None, reduction='mean', eps=1e-
         return loss.sum()
     return loss
 
-def adaptive_focal_loss(logits, targets, gamma=2.0, alpha=0.6, alpha1=0.5, lambda_l2=1e-4,
+def compute_optimal_thresholds(y_true, y_prob):
+    thresholds = []
+    for i in range(y_true.shape[1]):
+        best_thresh = 0.5
+        best_j = -1
+        for thresh in np.linspace(0.05, 0.95, 20):
+            y_pred_i = (y_prob[:, i] > thresh).astype(int)
+            tp = np.logical_and(y_pred_i == 1, y_true[:, i] == 1).sum()
+            fn = np.logical_and(y_pred_i == 0, y_true[:, i] == 1).sum()
+            fp = np.logical_and(y_pred_i == 1, y_true[:, i] == 0).sum()
+            tn = np.logical_and(y_pred_i == 0, y_true[:, i] == 0).sum()
+            tpr = tp / (tp + fn + 1e-8)
+            fpr = fp / (fp + tn + 1e-8)
+            j_stat = tpr - fpr
+            if j_stat > best_j:
+                best_j = j_stat
+                best_thresh = thresh
+        thresholds.append(best_thresh)
+    return np.array(thresholds)
+
+def adaptive_focal_loss(logits, targets, gamma=1.5, alpha=0.6, alpha1=0.5, lambda_l2=1e-4,
                         reduction='mean', model=None, eps=1e-6):
     """
     Adaptive Focal Loss for multi-label classification with L2 regularization.

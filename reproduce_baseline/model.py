@@ -35,22 +35,22 @@ class OdorClassifier(nn.Module):
     def __init__(self, num_tasks, mlp_dims=[96, 63]):
         super(OdorClassifier, self).__init__()
 
-        self.conv1 = GATConv(15, 20, heads=2, concat=True)
-        self.bn1 = nn.BatchNorm1d(40)
+        # self.conv1 = GATConv(15, 20, heads=2, concat=True)
+        # self.bn1 = nn.BatchNorm1d(40)
 
-        self.conv2 = GATConv(40, 27, heads=2, concat=True)
-        self.bn2 = nn.BatchNorm1d(54)
+        # self.conv2 = GATConv(40, 27, heads=2, concat=True)
+        # self.bn2 = nn.BatchNorm1d(54)
 
-        self.conv3 = GATConv(54, 36, heads=2, concat=True)
-        self.bn3 = nn.BatchNorm1d(72)
+        # self.conv3 = GATConv(54, 36, heads=2, concat=True)
+        # self.bn3 = nn.BatchNorm1d(72)
 
-        self.conv4 = GATConv(72, 92, heads=1, concat=False)
-        self.bn4 = nn.BatchNorm1d(92)
-        # self.conv1 = GCNConv(15, 20)
-        # self.bn1 = nn.BatchNorm1d(20)
+        # self.conv4 = GATConv(72, 92, heads=1, concat=False)
+        # self.bn4 = nn.BatchNorm1d(92)
+        self.conv1 = GCNConv(15, 20)
+        self.bn1 = nn.BatchNorm1d(20)
 
-        # self.conv2 = GCNConv(20, 27)
-        # self.bn2 = nn.BatchNorm1d(27)
+        self.conv2 = GCNConv(20, 129)
+        self.bn2 = nn.BatchNorm1d(129)
 
         # self.conv3 = GCNConv(27, 36)
         # self.bn3 = nn.BatchNorm1d(36)
@@ -60,10 +60,10 @@ class OdorClassifier(nn.Module):
 
         self.readout1 = ReadoutLayer()
         self.readout2 = ReadoutLayer()
-        self.readout3 = ReadoutLayer()
-        self.readout4 = ReadoutLayer()
+        # self.readout3 = ReadoutLayer()
+        # self.readout4 = ReadoutLayer()
 
-        self.mlp = MLPClassifier(input_dim= 258+26, hidden_dims=mlp_dims, output_dim=num_tasks)
+        self.mlp = MLPClassifier(input_dim= 149+26, hidden_dims=mlp_dims, output_dim=num_tasks) #258+26
 
     def forward(self, data, return_projections=False):
         x, edge_index, mol_features, batch = data.x, data.edge_index, data.mol_features, data.batch
@@ -76,16 +76,16 @@ class OdorClassifier(nn.Module):
         x2 = F.selu(self.bn2(x2))
         r2 = self.readout2(x2, batch)
 
-        x3 = self.conv3(x2, edge_index)
-        x3 = F.selu(self.bn3(x3))
-        r3 = self.readout3(x3, batch)
+        # x3 = self.conv3(x2, edge_index)
+        # x3 = F.selu(self.bn3(x3))
+        # r3 = self.readout3(x3, batch)
 
-        x4 = self.conv4(x3, edge_index)
-        x4 = F.selu(self.bn4(x4))
-        r4 = self.readout4(x4, batch)
+        # x4 = self.conv4(x3, edge_index)
+        # x4 = F.selu(self.bn4(x4))
+        # r4 = self.readout4(x4, batch)
 
         # Concate 
-        r_cat = torch.cat([r1, r2, r3, r4], dim=1)
+        r_cat = torch.cat([r1, r2], dim=1)
         # r_cat = F.softmax(r_cat, dim=-1)
         
         # Final MLP input
@@ -95,9 +95,9 @@ class OdorClassifier(nn.Module):
         # Save for optional inspection
         self.saved_projections = {
             'readout1': r1.detach().cpu(),
-            'readout2': r2.detach().cpu(), 
-            'readout3': r3.detach().cpu(),
-            'readout4': r4.detach().cpu()
+            'readout2': r2.detach().cpu()
+            # 'readout3': r3.detach().cpu(),
+            # 'readout4': r4.detach().cpu()
         }
 
         return (output, self.saved_projections) if return_projections else output

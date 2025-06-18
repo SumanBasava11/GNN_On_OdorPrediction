@@ -6,8 +6,6 @@ from Featurizer.node_features import get_node_features
 from Featurizer.edge_features import get_edge_features
 from Featurizer.mol_features import *
 
-df = pd.read_csv('C:/Users/suman/OneDrive/Bureau/Internship_Study/GNN_On_OdorPrediction/data/(Saturated)SoS_Full.csv', encoding='ISO-8859-1')
-
 def from_smiles(smiles: str, with_hydrogen: bool = False, kekulize: bool = False):
     mol = Chem.MolFromSmiles(smiles)
     if mol is None:
