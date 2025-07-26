@@ -12,7 +12,7 @@ def get_node_features(mol):
         'hybridization'
     ]
     
-    # For bond types, directly use the bond types from x_map
+    # # For bond types, directly use the bond types from x_map
     bond_types_columns = x_map['bond_types_connected']
 
     # Combine all column descriptions (regular + bond types)

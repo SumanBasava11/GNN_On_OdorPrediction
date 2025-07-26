@@ -25,12 +25,13 @@ def from_smiles(smiles: str, with_hydrogen: bool = False, kekulize: bool = False
             x=node_feat, 
             edge_index=edge_index, 
             edge_attr=edge_attr, 
-            smiles=smiles
+            smiles=smiles,
+            mol_features = mol_feat
         )
-        
-        data.mol_features = mol_feat
+
         return data
-        
+    
     except Exception as e:
         print(f"[from_smiles ERROR] {smiles} => {e}")
         return None
+        

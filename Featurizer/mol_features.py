@@ -3,6 +3,13 @@ from rdkit import Chem
 from rdkit.Chem import Descriptors, Lipinski, rdMolDescriptors, MolFromSmarts
 from Featurizer.feature_maps import mol_map
 from Functional_Group.hard_encode_fgs import count_functional_groups
+from rdkit import DataStructs
+import numpy as np
+
+def bitvector_to_tensor(bitvector):
+    arr = np.zeros((bitvector.GetNumBits(),), dtype=np.float32)
+    DataStructs.ConvertToNumpyArray(bitvector, arr)
+    return torch.tensor(arr, dtype=torch.float)
 
 def longest_carbon_chain(mol):
     """
@@ -41,5 +48,8 @@ def get_molecular_features(mol):
     ]
 
     fg_counts = count_functional_groups(mol)
-    full_feats =  features + fg_counts
-    return torch.tensor(full_feats, dtype=torch.float)
+
+    base_feats =  features + fg_counts
+    full_feats = torch.tensor(base_feats, dtype=torch.float)
+
+    return full_feats

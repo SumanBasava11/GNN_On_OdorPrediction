@@ -42,6 +42,12 @@ x_map = {
 e_map = {
     'stereo' : ['STEREONONE', 'STEREOANY', 'STEREOZ', 'STEREOE', 'STEREOCIS', 'STEREOTRANS'],
     'is_conjugated': [False, True],
+    # 'bond_types_connected' : [
+    #     'SINGLE',
+    #     'DOUBLE',
+    #     'TRIPLE',
+    #     'AROMATIC'
+    # ]
 }
 
 # Molecular features
